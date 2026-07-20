@@ -48,12 +48,28 @@
         nav a:hover { color: var(--accent-cyan); }
 
         /* --- GLOBAL LAYOUT & UTILS --- */
-        section {
-            max-width: 1100px; margin: 0 auto; padding: 100px 20px 40px;
+       section {
+            max-width: 1250px; /* <-- Naikkan dari 1100px jadi 1250px */
+            margin: 0 auto; 
+            padding: 100px 20px 40px;
         }
-        .section-tag {
-            font-family: 'JetBrains Mono', monospace; font-size: 1rem; color: var(--accent-pink);
-            margin-bottom: 20px; display: inline-block;
+       .section-tag {
+            font-family: 'JetBrains Mono', monospace; 
+            font-size: 1.6rem; /* Ukuran dibesarkan dari 1rem biar lebih proporsional */
+            font-weight: 700; /* Ditebalkan biar lebih tegas */
+            letter-spacing: 2px; /* Dikasih jarak antar huruf biar estetik tech/coding-nya dapet */
+            color: var(--accent-pink);
+            margin-bottom: 30px; /* Jarak ke bawah ditambah dikit biar lebih lega */
+            display: inline-block;
+            text-transform: uppercase; /* Dibikin huruf kapital semua biar kerasa kayak judul */
+        }
+
+        /* Penyesuaian khusus untuk layar HP biar gak kebesaran */
+        @media (max-width: 768px) {
+            .section-tag {
+                font-size: 1.3rem;
+                margin-bottom: 20px;
+            }
         }
         
         /* Kartu Bento Default */
@@ -87,6 +103,33 @@
         .card-photo img { width: 100%; height: 100%; object-fit: cover ; filter: grayscale(50%) contrast(1.2); transition: 0.5s; }
         .card-photo:hover img { filter: grayscale(0%); transform: scale(1.05); }
 
+        /* --- TOMBOL DOWNLOAD CV --- */
+        .btn-cv {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 25px; /* Memberi jarak dari paragraf di atasnya */
+            padding: 12px 24px;
+            background: rgba(0, 229, 255, 0.05); /* Latar transparan biru tipis */
+            border: 1px solid var(--accent-cyan); /* Garis batas biru cyan */
+            color: var(--accent-cyan);
+            border-radius: 8px; /* Sudut membulat menyesuaikan tema bento */
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        /* Efek saat kursor diarahkan ke tombol (Hover) */
+        .btn-cv:hover {
+            background: rgba(255, 126, 212, 0.1); /* Latar berubah pink transparan */
+            border-color: var(--accent-pink); /* Garis batas menjadi pink */
+            color: var(--accent-pink); /* Teks menjadi pink */
+            transform: translateY(-3px); /* Tombol sedikit terangkat */
+            box-shadow: 0 5px 15px rgba(255, 126, 212, 0.2); /* Efek glow pink di bawah tombol */
+        }
     
        /* Kotak Widget Jam Digital */
         .card-clock {
@@ -135,11 +178,50 @@
         .card-tech .tech-list p { font-size: 0.9rem; margin-bottom: 5px; color: var(--text-muted); }
 
         /* --- SECTION 2: PROJECTS --- */
-        .projects-grid {
+       .projects-grid {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
         }
-        .proj-img { height: 180px; width: 100%; border-radius: 12px; margin-bottom: 20px; overflow: hidden; }
-        .proj-img img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Pastikan proj-img punya position: relative buat nahan overlay */
+        .proj-img { 
+            height: 180px; width: 100%; border-radius: 12px; margin-bottom: 20px; 
+            overflow: hidden; position: relative; 
+        }
+
+        /* Tambahkan transisi biar fotonya bisa nge-zoom mulus */
+        .proj-img img { 
+            width: 100%; height: 100%; object-fit: cover; 
+            transition: transform 0.4s ease; 
+        }
+
+        /* --- OVERLAY HOVER PROJECTS --- */
+        .proj-overlay {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.5); /* Latar hitam transparan */
+            backdrop-filter: blur(2px); /* Blur tipis estetik */
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+
+        .proj-text {
+            color: var(--accent-cyan);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transform: translateY(15px); /* Ngumpet agak ke bawah dulu */
+            transition: transform 0.3s ease;
+            background: rgba(11, 14, 20, 0.9);
+            padding: 8px 16px;
+            border: 1px solid var(--accent-cyan);
+            border-radius: 30px; /* Bentuk tombol kapsul */
+        }
+
+        /* Eksekusi animasi saat bento-card disorot mouse */
+        #projects .bento-card:hover .proj-overlay { opacity: 1; }
+        #projects .bento-card:hover .proj-text { transform: translateY(0); }
+        #projects .bento-card:hover .proj-img img { transform: scale(1.08); }
+
         .bento-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
         .bento-card p.desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
 
@@ -150,17 +232,319 @@
         .gallery-item { padding: 0; aspect-ratio: 4/5; }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
 
-       /* --- SECTION 4: EXPERIENCE (BENTO TIMELINE) --- */
-        .exp-container {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+       /* --- SECTION 4: EXPERIENCE MODEL TAB BARU --- */
+      .exp-bento-wrapper {
+            background: var(--bento-bg); 
+            border: 1px solid var(--bento-border);
+            border-radius: 16px; 
+            padding: 30px; 
+            backdrop-filter: blur(12px);
+            width: 100%; /* <-- Ganti max-width: 900px jadi width: 100% */
+            margin: 0 auto;
+        }
+
+        /* Bagian Tombol Tabs */
+        .tabs-header {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tab-btn:hover { color: var(--text-main); }
+
+        /* Status Aktif Tombol */
+        .tab-btn.active[data-target="work"] { color: var(--accent-cyan); }
+        .tab-btn.active[data-target="org"] { color: var(--accent-pink); }
+
+        /* Garis Bawah Animasi (Underline) */
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -11px; /* Sejajar dengan garis border-bottom */
+            left: 0;
+            width: 0%;
+            height: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .tab-btn.active[data-target="work"]::after {
+            width: 100%;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        .tab-btn.active[data-target="org"]::after {
+            width: 100%;
+            background: var(--accent-pink);
+            box-shadow: 0 0 10px var(--accent-pink);
+        }
+
+        /* Konten Tabs & Animasi Muncul */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+        .tab-content.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* CSS untuk Detail Card & Timeline (Digabung) */
+        .exp-scroll-area { max-height: 550px; overflow-y: auto; padding-right: 15px; }
+        .exp-scroll-area::-webkit-scrollbar { width: 6px; }
+        .exp-scroll-area::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
+        .exp-scroll-area::-webkit-scrollbar-thumb { background: var(--accent-cyan); border-radius: 10px; }
+
+        /* Styling Kartu Detail (BRIN dkk) */
+        .exp-detail-card {
+            background: rgba(255, 255, 255, 0.03); /* Warna putih transparan 3% */
+            border: 1px solid rgba(255, 255, 255, 0.08); /* Border putih tipis */
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease; /* Biar transisinya mulus */
+        }
+
+        /* Efek nyala tipis pas di-hover mouse */
+        .exp-detail-card:hover {
+            background: rgba(255, 255, 255, 0.06); /* Putihnya sedikit lebih terang */
+            border-color: rgba(0, 229, 255, 0.3); /* Border ngikutin tema cyan lu */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Sedikit bayangan biar ngambang */
+        }
+        .exp-header { margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+        .exp-header h4 { font-size: 1.25rem; color: var(--accent-cyan); font-weight: 700; }
+        .exp-header .exp-date { color: var(--text-muted); font-size: 0.9rem; font-family: 'JetBrains Mono', monospace; }
+        .exp-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-left: 20px; margin-bottom: 20px; }
+        
+        /* Pastikan gridnya tetep 2 kolom */
+        .exp-photo-grid { 
+            display: grid !important; 
+            grid-template-columns: repeat(2, 1fr) !important; /* Mutlak 2 kolom di PC */
+            gap: 15px; 
+            margin-bottom: 20px; 
+            width: 100%;
+        }
+
+        .exp-photo-grid img { 
+            width: 100%; 
+            height: auto; 
+            aspect-ratio: 825 / 470; /* Rasio figma lu */
+            object-fit: cover; 
+            border-radius: 8px; 
+            transition: 0.4s ease; 
+            cursor: pointer; 
+            display: block; 
+        }
+
+        .exp-photo-grid img:hover { 
+            transform: scale(1.05); 
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); 
+            z-index: 10; 
+            position: relative; 
+        }
+
+        .exp-buttons { 
+            display: flex; 
+            gap: 30px; 
+            margin-top: 30px; /* <-- Tambahin baris ini buat ngasih jarak ke atas */
         }
         
-        /* Bikin kotaknya punya tinggi maksimal dan bisa di-scroll ke bawah */
-        .exp-scroll-area {
-            max-height: 500px; /* Batas tinggi kotak */
-            overflow-y: auto; 
-            padding-right: 15px; /* Jarak biar teks gak nabrak scrollbar */
+        .btn-doc { flex: 1; padding: 12px; background: rgba(255, 255, 255, 0.103); border: 1px solid var(--bento-border); border-radius: 8px; color: var(--accent-pink); text-decoration: none; font-size: 0.9rem; font-weight: 600; display: flex; justify-content: center; gap: 8px; transition: 0.3s ease; }
+        .btn-doc:hover { background: rgba(0, 229, 255, 0.05); border-color: var(--accent-cyan); color: var(--accent-cyan); transform: translateY(-3px); }
+
+        @media (max-width: 768px){
+            .tabs-header { flex-direction: column; gap: 10px; border-bottom: none; }
+            .tab-btn::after { display: none; } /* Matikan garis bawah di HP biar gak berantakan */
+            .tab-btn { border: 1px solid var(--bento-border); border-radius: 8px; }
+            .tab-btn.active[data-target="work"] { background: rgba(0, 229, 255, 0.1); border-color: var(--accent-cyan); }
+            .tab-btn.active[data-target="org"] { background: rgba(255, 126, 212, 0.1); border-color: var(--accent-pink); }
+            
+            /* Aturan Foto untuk HP (wajib di dalam kurung kurawal @media) */
+            .exp-photo-grid { grid-template-columns: 1fr !important; }
+            .exp-photo-grid img { height: auto; aspect-ratio: 16/9; }
+            .exp-buttons { flex-direction: column; }
         }
+
+        /* --- KUSUS GRID YUBAWAREHOUSE (3 KOLOM & HOVER EFEK) --- */
+        .yuba-photo-grid {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important; /* Bikin 3 kolom sejajar */
+            gap: 15px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .yuba-img-wrapper {
+            position: relative;
+            display: block;
+            border-radius: 8px;
+            overflow: hidden;
+            text-decoration: none;
+            aspect-ratio: 1 / 1; /* Biar gambarnya kotak presisi (1:1) kayak IG */
+        }
+
+        .yuba-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        /* OVERLAY GRADASI (Hitam ke Pink) */
+        .yuba-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            /* Gradasi dari Pink di atas, perlahan jadi Hitam pekat di bawah */
+            background: linear-gradient(to bottom, rgba(255, 126, 212, 0.6) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.9) 100%);
+            opacity: 0; /* Sengaja di-hidden dulu sebelum di-hover */
+            display: flex;
+            align-items: flex-end; /* Taruh konten di bawah */
+            justify-content: center; /* Posisi di tengah horisontal */
+            padding-bottom: 15px;
+            transition: opacity 0.4s ease;
+            z-index: 2;
+        }
+
+        /* TEKS LINK CYAN */
+        .yuba-link-text {
+            color: var(--accent-cyan);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transform: translateY(15px); /* Posisi awal agak turun ke bawah */
+            transition: transform 0.4s ease;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8); /* Biar teksnya tetep kebaca jelas */
+        }
+
+        /* --- ANIMASI SAAT MOUSE NGE-HOVER --- */
+        .yuba-img-wrapper:hover img {
+            transform: scale(1.08); /* Efek zoom tipis ke gambarnya */
+        }
+
+        .yuba-img-wrapper:hover .yuba-overlay {
+            opacity: 1; /* Muncullin gradasi pink */
+        }
+
+        .yuba-img-wrapper:hover .yuba-link-text {
+            transform: translateY(0); /* Teksnya naik ke atas kayak animasi nembul */
+        }
+
+        /* Responsive HP buat Yuba Grid */
+        @media (max-width: 768px) {
+            .yuba-photo-grid { 
+                grid-template-columns: 1fr !important; /* Balik jadi numpuk atas-bawah kalau di HP */
+            }
+        }
+    
+        /* --- SECTION: RESEARCH --- */
+        #research .projects-grid {
+            grid-template-columns: repeat(2, 1fr); /* Maksimal 2 kolom biar proporsional */
+            max-width: 800px; /* Biar gak terlalu lebar di layar laptop */
+            margin: 0 auto;
+        }
+
+        @media (max-width: 768px) {
+            
+             /* ... keep navbar compact & intro grid layout ... */
+            
+            /* Reset ukuran span biar numpuk rapi */
+            .card-intro, .card-photo, .card-clock, .card-tech { 
+                grid-column: span 1; 
+                grid-row: auto; 
+            }
+            
+            /* ... keep card-intro h1 size ... */
+
+            /* === THE FIX FOR THE PORTRAIT PHOTO === */
+            .card-photo { 
+                height: auto; /* Removestrict height: 250px; */
+                
+                /* Set aspect ratio portrait (Tinggi > Lebar) biar orangnya kelihatan full */
+                aspect-ratio: 9 / 16; /* atau pakai 3/4 if lebih prefer */
+                
+                /* Option: make it slightly narrower and center it within the stack */
+                width: 85%; /* Kurangin lebar biar tinggi orangnya gak terlalu melar */
+                margin: 0 auto; /* Tengahin posisi card-nya */
+                margin-bottom: 20px; /* Jarak bawah */
+                
+                padding: 0; /* Pastiin fotonya full mentok */
+            }
+            
+            /* Pastiin image-nya dapet posisi yang bener dari atas */
+            .card-photo img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover; /* Biar full, tapi kita atur aspect ratio card-nya */
+                object-position: top center; /* Paling penting: prioritasin tampilin bagian muka/kepala */
+            }
+            /* 1. Navbar dibikin lebih compact & muat di layar */
+            nav {
+                width: 90%;
+                padding: 10px 15px;
+                gap: 10px;
+                justify-content: center;
+                flex-wrap: wrap; /* Biar kalau kepanjangan dia turun ke bawah */
+                border-radius: 12px;
+            }
+            nav a { font-size: 0.75rem; padding: 5px; }
+
+            /* 2. Semua Bento Grid jadi 1 Kolom berjejer ke bawah */
+            .intro-grid, .gallery-grid { grid-template-columns: 1fr; }
+            
+            /* Reset ukuran span biar numpuk rapi */
+            .card-intro, .card-photo, .card-clock, .card-tech { 
+                grid-column: span 1; 
+                grid-row: auto; 
+            }
+            
+            /* 3. Penyesuaian Ukuran Teks & Tinggi Kotak */
+            .card-intro h1 { font-size: 2.1rem; }
+            .card-photo { height: 250px; } /* Foto dibikin lebih pendek dikit */
+            
+            /* 4. Experience Kotaknya Disesuaikan */
+            .exp-scroll-area { max-height: 400px; } /* Biar di HP scroll-nya gak kepanjangan */
+            .timeline-item { margin-bottom: 30px; }
+
+            /* 5. Contact Section - Tombol berjejer ke bawah biar gampang dipencet */
+            .contact-card { padding: 40px 20px; }
+            .contact-card h2 { font-size: 2rem; }
+            .contact-links { 
+                flex-direction: column; /* Tombol numpuk atas-bawah */
+                gap: 15px; 
+            }
+            .btn-contact { width: 100%; justify-content: center; } /* Tombol menuhin lebar layar */
+        }
+
+        /* --- Layar HP Kecil Banget (Max 480px) --- */
+        @media (max-width: 480px) {
+            section { padding-top: 110px; padding-bottom: 20px; } /* Jarak atas ditambahin dikit buat navbar */
+            .card-intro h1 { font-size: 1.8rem; }
+            .digital-time { font-size: 1.5rem; }
+        }
+           
+
+
+
+    
 
         /* Custom Scrollbar ala City Pop / Tech */
         .exp-scroll-area::-webkit-scrollbar { width: 6px; }
@@ -301,16 +685,309 @@
             .card-intro h1 { font-size: 1.8rem; }
             .digital-time { font-size: 1.5rem; }
         }
-        
+        .gallery-hover {
+            position: relative;
+            display: block; 
+            text-decoration: none;
+            overflow: hidden;
+            padding: 0; /* Memastikan gambar full mentok ke ujung kartu */
+        }
+
+        .gallery-hover img {
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: transform 0.5s ease;
+            display: block;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            /* Gradasi dari Hitam pekat di bawah (0%) ke Pink transparan di atas (100%) */
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(255, 126, 212, 0.3) 100%);
+            opacity: 0;
+            display: flex;
+            align-items: flex-end; /* Mendorong posisi teks agar berada di bawah */
+            justify-content: center;
+            padding-bottom: 25px; /* Memberi jarak teks dari sisi paling bawah */
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+
+        .gallery-text {
+            color: var(--accent-cyan); /* Teks di bawah menggunakan warna biru cyan */
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-align: center;
+            transform: translateY(15px); /* Posisi awal teks agak turun bersembunyi */
+            transition: transform 0.3s ease;
+        }
+
+        /* Animasi eksekusi saat di-hover */
+        .gallery-hover:hover .gallery-overlay {
+            opacity: 1; /* Menampilkan layar gradasi */
+        }
+
+        .gallery-hover:hover .gallery-text {
+            transform: translateY(0); /* Teks naik dengan mulus ke posisi normal */
+        }
+
+        .gallery-hover:hover img {
+            transform: scale(1.08); /* Memberikan efek zoom tipis pada gambar asli */
+        }
+        /* --- EFEK KLIK KARTU PROJECT --- */
+        #projects .bento-card {
+            cursor: pointer; /* Mengubah kursor jadi tangan pas hover */
+        }
+
+        /* --- MODAL / POP-UP PROJECTS --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px);
+            z-index: 2000; display: flex; justify-content: center; align-items: center;
+            opacity: 0; visibility: hidden; transition: 0.3s ease;
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+
+            .modal-content {
+            background: var(--bg-main); border: 1px solid var(--accent-cyan);
+            border-radius: 16px; width: 90%; max-width: 650px; padding: 30px;
+            position: relative; transform: translateY(30px); transition: 0.4s ease;
+            box-shadow: 0 10px 40px rgba(0, 229, 255, 0.15);
+            /* overflow-y dihapus dari sini biar tombol X di luar gak kepotong */
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+
+    
+        /* Tombol X Mengambang di Luar */
+        .close-modal {
+            position: absolute; 
+            top: -45px; /* Menarik tombol ke luar atas kotak */
+            right: 0px; /* Menyejajarkan tombol dengan garis kanan batas gambar */
+            width: 38px; 
+            height: 38px;
+            background: rgba(20, 25, 40, 0.8); /* Background gelap transparan */
+            border: 1px solid var(--text-muted); /* Border kotak tipis */
+            border-radius: 8px; /* Sudut sedikit tumpul (Bento style) */
+            padding-top: 4px; /* Dorong X dari atas ke bawah */
+            padding-left: 10.4px; /* Dorong X dari kiri ke kanan */
+            box-sizing: border-box; /* Wajib ditambahin biar padding gak merubah ukuran asli kotak (38x38) */
+            font-size: 1.2rem; 
+            color: var(--text-muted); 
+            cursor: pointer; 
+            transition: 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .close-modal:hover { 
+            border-color: var(--accent-pink);
+            color: var(--accent-pink);
+            background: rgba(255, 126, 212, 0.1); /* Efek nyala pink pas disorot */
+        }
+
+        /* Penyesuaian layar HP biar tombol X gak kepotong batas atas layar */
+        @media (max-width: 768px) {
+            .close-modal {
+                top: -50px;
+                right: 0px; 
+            }
+        }
+        /* --- STYLING TOMBOL LINK FIGMA --- */
+        .modal-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+            flex-wrap: wrap; /* Biar tetap aman kalau dibuka di HP */
+            gap: 10px;
+        }
+
+        .modal-header-flex h3 {
+            margin-bottom: 0 !important; /* Menimpa margin bawah bawaan h3 */
+        }
+
+        .btn-figma {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-main);
+            text-decoration: none;
+            border: 1px solid var(--text-main);
+            padding: 6px 14px;
+            border-radius: 6px;
+            transition: 0.3s ease;
+            background: transparent;
+        }
+
+        .btn-figma:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        .modal-body img { 
+            display: block; 
+            margin: 0 auto 20px auto; /* Sekalian mastiin fotonya beneran di tengah */
+            width: 100%; 
+            max-width: 100%; 
+            object-fit: cover; 
+            border: 12px; /* Menghilangkan frame/garis luarnya */
+            background: transparent; 
+        }
+        .modal-body h3 { font-size: 1.5rem; margin-bottom: 5px; color: var(--text-main); }
+        .modal-body .mono { font-size: 0.85rem; color: var(--accent-pink); margin-bottom: 20px; display: inline-block; }
+        .modal-body p { color: var(--text-muted); line-height: 1.6; margin-bottom: 15px; font-size: 0.95rem; }
+        .modal-body ul { margin-left: 20px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6; font-size: 0.95rem; }
+        .modal-body li { margin-bottom: 8px; }
+
+        /* --- CSS UNTUK IMAGE SLIDER DI MODAL --- */
+        .modal-slider { 
+            position: relative; 
+            width: 100%; 
+            margin: 0 auto 20px auto; 
+            border-radius: 8px; 
+            overflow: hidden; 
+            border: 0px solid var(--bento-border); 
+        }
+
+        /* Mengatur ulang gaya gambar khusus di dalam slider agar tidak tumpang tindih dengan CSS lama */
+        .modal-slider img.slide { 
+            display: none; 
+            width: 100%; 
+            margin: 0; 
+            border: none; 
+            border-radius: 0; 
+            object-fit: cover;
+        }
+
+        .modal-slider img.slide.active { 
+            display: block; 
+            animation: fadeSlide 0.5s ease-in-out;
+        }
+
+        @keyframes fadeSlide {
+            from { opacity: 0.4; }
+            to { opacity: 1; }
+        }
+
+        /* Tombol Panah Slider */
+        .slider-btn { 
+            position: absolute; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            background: rgba(11, 14, 20, 0.7); 
+            color: var(--text-main); 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+            padding: 8px 12px; 
+            cursor: pointer; 
+            font-size: 1rem; 
+            transition: 0.3s; 
+            border-radius: 6px; 
+            backdrop-filter: blur(4px);
+        }
+
+        .slider-btn:hover { 
+            background: rgba(0, 229, 255, 0.2); 
+            color: var(--accent-cyan); 
+            border-color: var(--accent-cyan);
+        }
+
+        .slider-btn.prev { left: 10px; }
+        .slider-btn.next { right: 10px; }
+
+        /* --- FULLSCREEN POSTER LIGHTBOX --- */
+            .poster-lightbox {
+                position: fixed; 
+                top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0, 0, 0, 0.95); /* Latar belakang lebih gelap dari modal biasa */
+                backdrop-filter: blur(10px);
+                z-index: 9999; /* Z-index tertinggi biar menutupi segalanya, termasuk navbar dan modal awal */
+                display: flex; 
+                justify-content: center; 
+                align-items: center;
+                opacity: 0; 
+                visibility: hidden; 
+                transition: 0.3s ease;
+            }
+
+            .poster-lightbox.active {
+                opacity: 1; 
+                visibility: visible;
+            }
+
+            .poster-lightbox img {
+                max-width: 95vw; 
+                max-height: 90vh; /* Membatasi tinggi gambar biar gak ngelewatin batas layar */
+                object-fit: contain; /* Memastikan rasio poster tetap utuh tanpa terpotong */
+                border-radius: 8px;
+                box-shadow: 0 0 50px rgba(0, 229, 255, 0.2); /* Efek glow tipis cyan */
+            }
+
+            /* Tombol X untuk Lightbox Poster */
+            .close-poster {
+                position: absolute; 
+                top: 20px; 
+                right: 30px; 
+                font-size: 2rem; 
+                color: var(--text-muted); 
+                cursor: pointer; 
+                transition: 0.3s ease;
+                z-index: 10000;
+            }
+
+            .close-poster:hover {
+                color: var(--accent-pink);
+                transform: scale(1.1);
+            }
+
+            /* --- CSS BARU UNTUK SCROLL HORIZONTAL FOTOGRAFI --- */
+            .photo-scroll-wrapper {
+                display: flex;
+                gap: 20px;
+                overflow-x: auto;
+                padding-bottom: 20px;
+                scroll-snap-type: x mandatory; /* Bikin gesernya nge-snap rapi */
+            }
+
+            /* Kustomisasi bentuk Scrollbar biar matching sama tema */
+            .photo-scroll-wrapper::-webkit-scrollbar { height: 8px; }
+            .photo-scroll-wrapper::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
+            .photo-scroll-wrapper::-webkit-scrollbar-thumb { background: var(--accent-pink); border-radius: 10px; }
+            .photo-scroll-wrapper::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
+
+            .photo-scroll-item {
+                flex: 0 0 auto; /* Biar elemennya gak maksa mengecil */
+                height: 450px; /* Tinggi disamaratakan */
+                width: max-content; 
+                scroll-snap-align: start;
+                padding: 0 !important; /* Timpa padding dari bento-card */
+            }
+
+            /* Gambar akan ngikutin rasio aslinya secara natural */
+            .photo-scroll-item img {
+                height: 100%;
+                width: auto; /* Lebar otomatis ngikutin tinggi */
+                display: block;
+                object-fit: cover;
+            }
+
+            /* Sesuaikan tinggi buat layar HP */
+            @media (max-width: 768px) {
+                .photo-scroll-item { height: 320px; }
+            }
     </style>
 </head>
 <body>
 
     <nav>
         <a href="#home">Home</a>
+        <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
+        <!-- <a href="#research">Research</a> -->
         <a href="#gallery">Gallery</a>
-        <a href="#experience">Exp</a>
+        <a href="#photography">Photography</a>
         <a href="#contact">Contact</a>
     </nav>
 
@@ -320,6 +997,7 @@
                 <span class="mono" style="color: var(--accent-cyan); margin-bottom: 15px;">> About Me </span>
                 <h1>Hello, I Am<br>Reby Jovanza Guestfint</h1>
                 <p>Electrical Engineering Student focused on Telecommunications. I bridge the gap between hardware and software, building automated networks and IoT solutions with Python, while exploring visual aesthetics through graphic design.</p>
+                <a href="https://drive.google.com/file/d/17iJ9goBcEmI6_Q9wblux4XsAu7pL621R/view?usp=drive_link" target="_blank" class="btn-cv"><i class="fas fa-file-download"></i> Download CV</a>
             </div>
 
             <div class="bento-card card-photo">
@@ -330,43 +1008,239 @@
                 <span class="mono" style="color: var(--accent-cyan); font-size: 0.7rem; margin-bottom: 5px;">Local Time</span>
                 <div class="digital-time" id="live-clock">00:00:00</div>
                 <p class="mono" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 5px;">JKT, ID (UTC+7)</p>
-                <div class="status-dot-container">
+                <!--<div class="status-dot-container">
                     <div class="status-dot"></div>
                     <span style="font-size: 0.65rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">SYSTEM ONLINE</span>
-                </div>
+                </div>-->
             </div>
 
             <div class="bento-card card-tech">
-                <span class="mono" style="color: var(--accent-cyan); margin-bottom: 10px;">Skills</span>
-                <div class="tech-list">                
-                    <p><i class="fab fa-figma"></i> Figma / Photoshop</p>
-                    <p><i class="fas fa-network-wired"></i> Cisco / IoT</p>
-                    <p><i class="fab fa-python"></i> Python (Netmiko)</p>
-                </div>
+            <span class="mono" style="color: var(--accent-cyan); margin-bottom: 5px;">Skills</span>
+            
+            <div class="tech-list">
+                <!-- Kategori Engineering (Cyan) -->
+                <p class="mono" style="color: var(--accent-cyan); font-size: 0.75rem; margin: 10px 0 5px;">> Dev & Eng</p>
+                <p><i class="fas fa-microchip"></i> ESP32 / Arduino / Hardware</p>
+                <p><i class="fab fa-python"></i> Python (Basic) / Cisco</p>
+
+                <!-- Kategori Design (Pink) -->
+                <p class="mono" style="color: var(--accent-pink); font-size: 0.75rem; margin: 15px 0 5px;">> Design</p>
+                <p><i class="fas fa-pen-nib"></i> Figma / Ps / Lr / Pr / Canva</p>
             </div>
+        </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <span class="section-tag">Experience</span>
+        
+        <div class="exp-bento-wrapper reveal">
+            <!-- TAB HEADERS (Tombol Navigasi) -->
+            <div class="tabs-header">
+                <button class="tab-btn active" data-target="work" onclick="openTab('work')">
+                    <i class="fas fa-briefcase"></i> Work Experience
+                </button>
+                <button class="tab-btn" data-target="org" onclick="openTab('org')">
+                    <i class="fas fa-users"></i> Organizational
+                </button>
+            </div>
+
+            <!-- TAB KONTEN 1: WORK EXPERIENCE -->
+            <div id="work" class="tab-content active">
+                <div class="exp-scroll-area">
+                    
+                    <!-- KARTU BRIN -->
+                    <div class="exp-detail-card">
+                        <div class="exp-header"style="margin-bottom: 4px;">
+                        <h4>Research Intern</h4>
+                        <p class="exp-date">Aug - Sep 2025</p>
+                    </div>
+                    <p style="color: var(--text-main); font-size: 0.95rem; margin-bottom: 15px;"><strong>Badan Riset dan Inovasi Nasional (BRIN)</strong></p>
+                    <ul class="exp-desc">
+                        <li>Conducted literature review and presented findings on mmWave radar for non-contact vital sign monitoring.</li>
+                        <li>Configured and tested TI XWR1443 BOOST and uRAD AWR1843 radar platforms.</li>
+                        <li>Analyzed experimental data and prepared technical documentation for biomedical sensing research.</li>
+                    </ul>
+                        <div class="exp-photo-grid">
+                            <img src="img/imgbrin-1.png" alt="BRIN Activity 1">
+                            <img src="img/imgbrin-2.png" alt="BRIN Radar Testing">
+                            <img src="img/imgbrin-3.png" alt="BRIN Lab Work">
+                            <img src="img/imgbrin-4.png" alt="BRIN Data Analysis">
+                        </div>
+                        <div class="exp-buttons">
+                            <a href="https://drive.google.com/file/d/1aGxGFVmpPfiqyBF_1fTjN9sa_8p7aNgw/view?usp=sharing" target="_blank" class="btn-doc">📜 Certificate</a>
+                            <a href="https://drive.google.com/file/d/1YuiJNRdAXxrU0BXecrcXGBzV6UmaXPps/view?usp=sharing" target="_blank" class="btn-doc">📑 Evaluation Letter</a>
+                        </div>
+
+                    </div>
+                    <!-- KARTU FREELANCE -->
+                    <div class="exp-detail-card">
+                        <div class="exp-header"style="margin-bottom: 4px;">
+                            <h4>Freelance Graphic Designer</h4>
+                            <p class="exp-date">Sep 2024 - Oct 2025</p>
+                        </div>
+                        <p style="color: var(--text-main); font-size: 0.95rem; margin-bottom: 15px;"><strong>Yubawarehouse</strong></p>
+                        <ul class="exp-desc">
+                            <li>Produced daily visual content (including graphic assets and occasional short-form promotional videos) for a Korean goods purchasing service.</li>
+                            <li>Ensured accurate product displays and maintained brand consistency across social media platforms.</li>
+                        </ul>
+                    </div>
+                    <!-- KARTU SPG EVENT -->
+                    <div class="exp-detail-card">
+                        <div class="exp-header"style="margin-bottom: 4px;">
+                            <h4>Part-Time SPG Team Leader (Loacker Promotion)</h4>
+                            <p class="exp-date">Aug 2024 - Sep 2024</p>
+                        </div>
+                         <p style="color: var(--text-main); font-size: 0.95rem; margin-bottom: 15px;"><strong>PT. Komplit Indonesia</strong></p>
+                        <ul class="exp-desc">
+                            <li>Led and coordinated daily operational activities for the SPG team across multiple retail outlets to meet promotional targets.</li>
+                            <li>Acted as the primary liaison with agency PICs to ensure smooth event execution and objective alignment.</li>
+                            <li>Compiled, verified, and analyzed weekly sales performance data using Microsoft Excel, successfully driving the team to achieve <strong>110% of the daily sales target</strong>.</li>
+                        </ul>
+                    </div> <!-- Penutup Kartu SPG -->
+
+                    <!-- KARTU STW -->
+                    <div class="exp-detail-card">
+                         <div class="exp-header"style="margin-bottom: 4px;">
+                            <h4>Operations Assistant</h4>
+                            <p class="exp-date">Nov 2023 - Apr 2024</p>
+                        </div>
+                        <p style="color: var(--text-main); font-size: 0.95rem; margin-bottom: 15px;"><strong>Undisclosed B2B Supply Company</strong></p>
+                        <ul class="exp-desc">
+                            <li>Managed end-to-end commercial documentation, accurately preparing and processing Request for Materials, Invoices, and Delivery Orders.</li>
+                            <li>Coordinated the physical packaging and shipment of project materials to logistics partners, ensuring safe and timely distribution.</li>
+                        </ul>
+                        </div> <!-- Penutup Kartu STW -->
+
+                    </div>
+            </div>
+
+            <!-- TAB KONTEN 2: ORGANIZATIONAL -->
+            <div id="org" class="tab-content">
+    <div class="exp-scroll-area">
+        
+            <!-- BAGIAN 1: CORE ORGANIZATION (Model Kotak/Card) -->
+            <h3 style="color: var(--accent-pink); margin-bottom: 20px; font-size: 1.2rem; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-sitemap"></i> Core Organization
+            </h3>
+
+            <!-- KARTU KSM IoT -->
+             <div class="exp-detail-card" onclick="window.open('//www.instagram.com/p/DMNB-72R3MD/?img_index=3', '_blank')" style="cursor: default;">
+                <div class="exp-header">
+                    <h4>Head of Creative Media</h4>
+                    <p class="exp-date">Jan 2025 - Jan 2026</p>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;"><strong>KSM Internet of Things UPNVJ</strong> - Managed visual branding, digital publications, and creative media strategies for the IoT student study group.</p>
+            </div>
+
+            <!-- KARTU HMTE -->
+             <div class="exp-detail-card" onclick="window.open('//www.instagram.com/p/DKoixjHTp0y/?img_index=4', '_blank')" style="cursor: default;">
+                <div class="exp-header">
+                    <h4>Staff of Visual Communication Design</h4>
+                    <p class="exp-date">Jan 2025 - Jan 2026</p>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;"><strong>HMTE UPNVJ</strong> - Designed publication materials, documented events, and supported the visual campaigns of the Electrical Engineering Student Association.</p>
+            </div>
+
+            <!-- KARTU OSIS -->
+            <div class="exp-detail-card" onclick="window.open('//www.instagram.com/p/CPpcecdFCOl/?img_index=2', '_blank')" style="cursor: default;">
+                <div class="exp-header">
+                    <h4>Head of Visual Communication Design</h4>
+                    <p class="exp-date">Aug 2020 - Aug 2021</p>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;"><strong>OSIS SMAN 60 Jakarta</strong> - Led the design team to produce visual assets and documentation for high school student council programs.</p>
+            </div>
+
+        <!-- BAGIAN 2: VOLUNTEERING / COMMITTEE (Model Timeline Titik) -->
+        <h3 style="color: var(--accent-pink); margin-top: 40px; margin-bottom: 20px; font-size: 1.2rem; display: flex; align-items: center; gap: 8px;">
+            <i class="fas fa-hands-helping"></i> Event Committee & Volunteering
+        </h3>
+        
+        <div class="timeline org-dot">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Sep 2024 - Nov 2024</div>
+                <h4>Head of Publication Design & Doc.</h4>
+                <p>MOSFET 2024</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Sep 2024 - Nov 2024</div>
+                <h4>Staff of Publication Design & Doc.</h4>
+                <p>ELECTROLYMPIC 2024</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Jul 2024 - Nov 2024</div>
+                <h4>Staff of Publication Design & Doc.</h4>
+                <p>Veteran Got Talent 2024</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Nov 2023 - Dec 2023</div>
+                <h4>Staff of Logistics Division</h4>
+                <p>Electrical Competition 2023</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Aug 2023 - Nov 2023</div>
+                <h4>Staff of Logistics Division</h4>
+                <p>Masa Bimbingan Teknik Elektro 2023</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Jul 2023 - Aug 2023</div>
+                <h4>Staff of Publication Design & Doc.</h4>
+                <p>Teknik Elektro Mengajar 2023</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">Nov 2022 - Jan 2023</div>
+                <h4>Staff of Publication Design & Doc.</h4>
+                <p>Campus Goes to Sixty 2023</p>
+            </div>
+        </div>
+
+    </div>
+</div>
         </div>
     </section>
 
     <section id="projects">
-        <span class="section-tag">Projects</span>
-        <div class="projects-grid reveal">
-            
-            <div class="bento-card">
-                <div class="proj-img"><img src="img/SF300-Dashboard.png" alt="Cisco"></div>
+    <span class="section-tag">Projects</span>
+    <div class="projects-grid reveal">
+        
+        <!-- Kartu 1: Cisco -->
+            <div class="bento-card" onclick="openModal('modal-port-sec')">
+                <div class="proj-img"><img src="img/SF300-Dashboard.png" alt="Cisco">
+                    <div class="proj-overlay">
+                        <span class="proj-text"><i class="fas fa-search-plus"></i> Click for Details</span>
+                       </div> 
+                </div>
                 <h3>Port Security Automation</h3>
                 <p class="mono" style="color: var(--accent-pink); font-size: 0.8rem; margin-bottom: 10px;">[Cisco SF-300 / Python]</p>
                 <p class="desc">A Python-powered Custom Web Dashboard utilizing Netmiko to automate Layer 2 Port Security, enabling efficient 1-click access control.</p>
             </div>
 
-            <div class="bento-card">
-                <div class="proj-img"><img src="img/BoxGasDetector.png" alt="IoT"></div>
+            <!-- Kartu 2: IoT -->
+            <div class="bento-card" onclick="openModal('modal-iot')">
+                <div class="proj-img"><img src="img/BoxGasDetector.png" alt="IoT">
+                    <div class="proj-overlay">
+                        <span class="proj-text"><i class="fas fa-search-plus"></i> Click for Details</span>
+                    </div>
+                </div>
                 <h3>IoT Gas Leak Detector</h3>
                 <p class="mono" style="color: var(--accent-pink); font-size: 0.8rem; margin-bottom: 10px;">[ESP-NOW / Hardware]</p>
                 <p class="desc">An autonomous IoT safety system featuring router-independent M2M communication to automatically trip electrical breakers during emergencies.</p>
             </div>
 
-            <div class="bento-card">
-                <div class="proj-img"><img src="img/SiakadFigma.png" alt="SIAKAD"></div>
+            <!-- Kartu 3: SIAKAD -->
+            <div class="bento-card" onclick="openModal('modal-siakad')">
+                <div class="proj-img"><img src="img/SiakadFigma.png" alt="SIAKAD">
+                    <div class="proj-overlay">
+                        <span class="proj-text"><i class="fas fa-search-plus"></i> Click for Details</span>
+                    </div>
+                </div>
                 <h3>SIAKAD Desktop UI Redesign</h3>
                 <p class="mono" style="color: var(--accent-pink); font-size: 0.8rem; margin-bottom: 10px;">[Figma / UI-UX]</p>
                 <p class="desc">A comprehensive visual interface redesign of a campus academic portal, focused on modernizing information hierarchy.</p>
@@ -375,131 +1249,136 @@
         </div>
     </section>
 
+     
     <section id="gallery">
-        <span class="section-tag"> Gallery Design</span>
+        <span class="section-tag">Gallery Design</span>
         <div class="gallery-grid reveal">
-            <div class="bento-card gallery-item"><img src="img/GD1.png" alt="Design 1"></div>
-            <div class="bento-card gallery-item"><img src="img/GD2.png" alt="Design 2"></div>
-            <div class="bento-card gallery-item"><img src="img/GD3.png" alt="Design 3"></div>
-            <div class="bento-card gallery-item"><img src="img/GD4.png" alt="Design 1"></div>
-            <div class="bento-card gallery-item"><img src="img/GD5.png" alt="Design 2"></div>
-            <div class="bento-card gallery-item"><img src="img/GD5-1.png" alt="Design 3"></div>
-        </div>
-    </section>
-
-    <section id="experience">
-        <span class="section-tag">Experience </span>
-        <div class="exp-container reveal">
             
-            <div class="bento-card">
-                <h3 style="margin-bottom: 20px; color: var(--accent-cyan); font-size: 1.4rem;"><i class="fas fa-briefcase"></i> Work Experience</h3>
-                
-                <div class="exp-scroll-area">
-                    <div class="timeline">
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">Aug - Sep 2025</div>
-                            <h4>Research Intern - BRIN</h4>
-                            <ul>
-                                <li>Conducted literature review on mmWave technology for non-contact vital sign monitoring.</li>
-                                <li>Executed functional testing of uRad mmWave radar modules to validate accuracy in detecting human heart rates.</li>
-                                <li>Analyzed sensor performance and experimental data for biomedical applications.</li>
-                            </ul>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">Sep 2024 - Oct 2025</div>
-                            <h4>Freelance Graphic Designer</h4>
-                            <p>Yubawarehouse - Created daily sales content for a Korean goods purchasing service, ensuring accurate product displays and maintaining brand consistency.</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">Aug 2024 - Sep 2024</div>
-                            <h4>Team Leader SPG Event Loaker</h4>
-                            <p>PT. Komplit Indonesia - Coordinated team daily activities, communicated with agency PICs, and compiled weekly sales reports in Excel.</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">Nov 2023 - Apr 2024</div>
-                            <h4>Operations Assistant</h4>
-                            <p>CV. STOWINDO - Managed inventory, prepared project materials, coordinated logistics, and managed essential delivery documents.</p>
-                        </div>
-                    </div>
+            <!-- YUBAWAREHOUSE 1: serafim -->
+            <a href="https://www.instagram.com/p/DG2rQzoJ3uF/?img_index=1" target="_blank" class="bento-card gallery-item gallery-hover">
+                <img src="img/lesserafim.png" alt="Yubawarehouse Campaign 1">
+                <div class="gallery-overlay">
+                    <span class="gallery-text">Instagram Post: Yubawarehouse</span>
                 </div>
-            </div>
+            </a>
 
-            <div class="bento-card">
-                <h3 style="margin-bottom: 20px; color: var(--accent-pink); font-size: 1.4rem;"><i class="fas fa-users"></i> Organizational</h3>
-                
-                <div class="exp-scroll-area">
-                    <div class="timeline org-dot">
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">Jan 2025 - Jan 2026</div>
-                            <h4>Head of Creative Media</h4>
-                            <p>KSM Internet of Things UPNVJ</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">Jan 2025 - Jan 2026</div>
-                            <h4>Staff of Visual Communication Design</h4>
-                            <p>HMTE UPNVJ</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">Sep 2024 - Nov 2024</div>
-                            <h4>Head of Publication Design & Doc.</h4>
-                            <p>MOSFET 2024</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">Sep 2024 - Nov 2024</div>
-                            <h4>Staff of Publication Design & Doc.</h4>
-                            <p>ELECTROLYMPIC 2024</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">Jul 2024 - Nov 2024</div>
-                            <h4>Staff of Publication Design & Doc.</h4>
-                            <p>Veteran Got Talent 2024</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">Nov 2023 - Dec 2023</div>
-                            <h4>Staff of Logistics Division</h4>
-                            <p>Electrical Competition 2023</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">Aug 2023 - Nov 2023</div>
-                            <h4>Staff of Logistics Division</h4>
-                            <p>Masa Bimbingan Teknik Elektro 2023</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">Jul 2023 - Aug 2023</div>
-                            <h4>Staff of Publication Design & Doc.</h4>
-                            <p>Teknik Elektro Mengajar 2023</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">Nov 2022 - Jan 2023</div>
-                            <h4>Staff of Publication Design & Doc.</h4>
-                            <p>Campus Goes to Sixty 2023</p>
-                        </div>
-                        <div class="timeline-item">
-                            <div class="timeline-dot"></div>
-                            <div class="timeline-date">Aug 2020 - Aug 2021</div>
-                            <h4>Head of Visual Communication Design</h4>
-                            <p>OSIS SMAN 60 Jakarta</p>
-                        </div>
-                    </div>
+            <!--IOT BIRU SSH  -->
+            <a href="https://www.instagram.com/p/DNhmWKxR3UT/?img_index=1" target="_blank" class="bento-card gallery-item gallery-hover">
+                <img src="img/COVER NETWORK.png" alt="Yubawarehouse Campaign 2">
+                <div class="gallery-overlay">
+                    <span class="gallery-text">Instagram Post: KSM IoT UPNVJ</span>
                 </div>
-            </div>
+            </a>
 
+             <!-- HMTE MMWAVE -->
+            <a href="https://www.instagram.com/p/DRmJeCeE3TQ/?img_index=7" target="_blank" class="bento-card gallery-item gallery-hover">
+                <img src="img/GD4.png" alt="Yubawarehouse Campaign 2">
+                <div class="gallery-overlay">
+                    <span class="gallery-text">Instagram Post: HMTE UPNVJ</span>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/p/DR69WZIE5U5/?img_index=6" target="_blank" class="bento-card gallery-item gallery-hover">
+            <img src="img/GD1.png" alt="Design 1">
+            <div class="gallery-overlay">
+                <span class="gallery-text">Instagram Post: HMTE UPNVJ</span>
+            </div>
+        </a>
+
+            <!-- DESAIN KOMISI 3 -->
+                <a href="img/eos2.png" target="_blank" class="bento-card gallery-item gallery-hover">
+                    <img src="img/eos2.png" alt="Design 3">
+                    <div class="gallery-overlay">
+                        <span class="gallery-text">Personal Project</span>
+                    </div>
+                </a>
+            <!-- MINJI-1 -->
+                <a href="https://www.instagram.com/p/DJVYeHVTO45/" target="_blank" class="bento-card gallery-item gallery-hover">
+                    <img src="img/minj.png" alt="Design 2">
+                    <div class="gallery-overlay">
+                        <span class="gallery-text">Instagram Post: Yubawarehouse</span>
+                    </div>
+                </a>              
+            </a>
         </div>
     </section>
 
+    <!-- SECTION BARU: PHOTOGRAPHY (HORIZONTAL SCROLL) -->
+    <section id="photography">
+        <span class="section-tag">Photography</span>
+        <div class="photo-scroll-wrapper reveal">
+            
+            <!-- FOTO 1: Vespa City Pop (Potret) -->
+            <div class="bento-card gallery-hover photo-scroll-item">
+                <img src="img/vespa1.jpg" alt="Vespa City Pop Night">
+                <div class="gallery-overlay">
+                    <span class="gallery-text">Night Vibe</span>
+                </div>
+            </div>
+
+            <!-- FOTO 2: Traffic Malam (Potret) -->
+            <div class="bento-card gallery-hover photo-scroll-item">
+                <img src="img/thamrin1.jpg" alt="Jakarta Night Vibe">
+                <div class="gallery-overlay">
+                    <span class="gallery-text"> Urban Night</span>
+                </div>
+            </div>
+
+            <!-- FOTO 3: Automotive (Lanskap utuh, gak kepotong!) -->
+            <div class="bento-card gallery-hover photo-scroll-item">
+                <img src="img/SX-4.jpg" alt="Automotive Toyota Yaris">
+                <div class="gallery-overlay">
+                    <span class="gallery-text">Automotive</span>
+                </div>
+            </div>
+
+            <!-- FOTO 4: Automotive (Lanskap utuh, gak kepotong!) -->
+            <div class="bento-card gallery-hover photo-scroll-item">
+                <img src="img/dariblokm1.jpg" alt="Automotive Toyota Yaris">
+                <div class="gallery-overlay">
+                    <span class="gallery-text">City</span>
+                </div>
+            </div>
+
+            <!-- FOTO 6: Automotive (Lanskap utuh, gak kepotong!) -->
+            <div class="bento-card gallery-hover photo-scroll-item">
+                <img src="img/Yaris1.JPG" alt="Automotive Toyota Yaris">
+                <div class="gallery-overlay">
+                    <span class="gallery-text">Automotive</span>
+                </div>
+            </div>
+            <!-- FOTO 5: Automotive (Lanskap utuh, gak kepotong!) -->
+            <div class="bento-card gallery-hover photo-scroll-item">
+                <img src="img/thamrin2.jpg" alt="Automotive Toyota Yaris">
+                <div class="gallery-overlay">
+                    <span class="gallery-text">Urban</span>
+                </div>
+            </div>
+
+            <!-- FOTO 7: Automotive (Lanskap utuh, gak kepotong!) -->
+            <div class="bento-card gallery-hover photo-scroll-item">
+                <img src="img/PJBL1.jpg" alt="Automotive Toyota Yaris">
+                <div class="gallery-overlay">
+                    <span class="gallery-text">Documentation</span>
+                </div>
+            </div>
+             <!-- FOTO 8: Automotive (Lanskap utuh, gak kepotong!) -->
+            <div class="bento-card gallery-hover photo-scroll-item">
+                <img src="img/mosfet2.png" alt="Automotive Toyota Yaris">
+                <div class="gallery-overlay">
+                    <span class="gallery-text">Documentation</span>
+                </div>
+            </div>
+            <!-- FOTO 8: Automotive (Lanskap utuh, gak kepotong!) -->
+            <div class="bento-card gallery-hover photo-scroll-item">
+                <img src="img/VGT1.JPG" alt="Automotive Toyota Yaris">
+                <div class="gallery-overlay">
+                    <span class="gallery-text">Documentation</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <section id="contact">
         <div class="bento-card contact-card reveal">
             <span class="mono" style="color: var(--accent-cyan); font-size: 1.2rem;"> Reby Jovanza Guestfint</span>
@@ -509,7 +1388,7 @@
             <div class="contact-links">
                 <a href="mailto:rebyjovanza@gmail.com" class="btn-contact"><i class="fas fa-envelope"></i> Email</a>
                 <a href="https://linkedin.com/in/rebyjovanzaguestfint" target="_blank" class="btn-contact"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                <a href="https://instagram.com/Reby_jg" target="_blank" class="btn-contact"><i class="fab fa-instagram"></i> Instagram</a>
+                <!--<a href="https://instagram.com/Reby_jg" target="_blank" class="btn-contact"><i class="fab fa-instagram"></i> Instagram</a>-->
             </div>
         </div>
     </section>
@@ -517,6 +1396,106 @@
     <footer>
         <span class="mono">&copy; 2026 Reby Jovanza Guestfint </span><br><br>
     </footer>
+        <!-- Modal 1 -->
+        <div class="modal-overlay" id="modal-port-sec" onclick="closeModal(event, this)">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeModalBtn('modal-port-sec')">&#10005;</span>
+                <div class="modal-body">
+                    <img src="img/kotak3.png" alt="Cisco Port Security">
+                    <h3>Port Security Automation</h3>
+                    <span class="mono" style="color: var(--accent-pink); font-size: 0.85rem; margin-bottom: 20px; display: inline-block;">[Cisco SF-300 / Python]</span>
+                    <p>Developed a custom web-based dashboard designed to simplify and automate Layer 2 network security protocols on Cisco SF-300 switches.</p>
+                    <p style="color: var(--accent-cyan); margin-bottom: 5px; font-weight: 600;">Technical Highlights:</p>
+                    <ul style="margin-left: 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+                        <li>Implemented Python and Netmiko to push automated CLI configurations.</li>
+                        <li>Created an intuitive GUI for 1-click access control.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal 2: IoT -->
+        <div class="modal-overlay" id="modal-iot" onclick="closeModal(event, this)">
+            <div class="modal-content">
+                <!-- Tombol X udah pakai unicode kapital presisi -->
+                <span class="close-modal" onclick="closeModalBtn('modal-iot')">&#10005;</span>
+                
+                <div class="modal-body">
+                    
+                    <!-- BAGIAN IMAGE SLIDER -->
+                    <div class="modal-slider">
+                        <div class="slides" id="iot-slides">
+                            <!-- Foto 1 (Aktif pertama kali) -->
+                            <img src="img/kotak2.png" class="slide active" alt="IoT Gas Leak 1">
+                            <!-- Foto 2 (Ganti src dengan foto asli lu) -->
+                            <img src="img/kotak2-1.png" class="slide" alt="IoT Gas Leak 2">
+                           
+                        </div>
+                        <!-- Tombol Navigasi Kiri & Kanan -->
+                        <button class="slider-btn prev" onclick="changeSlide(-1)">&#10094;</button>
+                        <button class="slider-btn next" onclick="changeSlide(1)">&#10095;</button>
+                    </div>
+                                        
+                    <!-- Flexbox untuk Judul & Tombol Poster biar sejajar -->
+                    <div class="modal-header-flex">
+                        <h3>Smart Gas Leak Detector</h3>
+                        <!-- Tombol pemanggil Fullscreen Poster -->
+                        <button onclick="openPoster()" class="btn-figma">VIEW POSTER</button>
+                    </div>
+                    
+                    <span class="mono" style="color: var(--accent-pink); font-size: 0.85rem; margin-bottom: 20px; display: inline-block;">[ESP-NOW / Hardware / Collaborative Project]</span>
+                        
+                    <p>A collaborative project to develop a smart IoT safety ecosystem aimed at preventing kitchen fires. The system utilizes a dual-ESP32 architecture communicating wirelessly via the router-independent ESP-NOW protocol.</p>
+                    
+                    <p style="color: var(--accent-cyan); margin-bottom: 5px; font-weight: 600;">Technical Highlights:</p>
+                    <ul style="margin-left: 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+                        <li>Integrated an MQ6 sensor for LPG detection and a speaker for local voice alerts.</li>
+                        <li>Engineered a motorized servo mechanism to physically trip the MCB switch, cutting house electricity during emergencies.</li>
+                        <li>Implemented the CallMeBot API to send real-time emergency notifications via WhatsApp.</li>
+                        <li>Successfully managed project lifecycle and budget allocation to deliver a fully functional prototype.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal 3: SIAKAD -->
+        <div class="modal-overlay" id="modal-siakad" onclick="closeModal(event, this)">
+            <div class="modal-content">
+                <!-- Tombol Close Kotak -->
+                <span class="close-modal" onclick="closeModalBtn('modal-siakad')">&#10005;</span>
+                    <div class="modal-body">
+                    <img src="img/SiakadFigma.png" alt="SIAKAD Redesign">
+                    
+                    <!-- Flexbox untuk Judul & Tombol Figma biar sejajar -->
+                    <div class="modal-header-flex">
+                        <h3>SIAKAD Desktop UI Redesign</h3>
+                        <!-- link figma -->
+                        <a href="https://www.figma.com/proto/zPUus7IXJ73CgPqCFuIL3G/IoT-UI%2FUX-Test?node-id=0-1&t=YE4ywA5TBmt17sK7-1" target="_blank" class="btn-figma">LINK FIGMA</a>
+                    </div>
+                    
+                    <span class="mono" style="color: var(--accent-pink); font-size: 0.85rem; margin-bottom: 20px; display: inline-block;">[Figma / UI-UX]</span>
+                    
+                    <!-- Deskripsi yang sudah ditambahkan konteks KSM IoT -->
+                    <p>A personal initiative to restructure the visual interface and user experience of the university's academic portal. <strong>This project was developed as a prerequisite assignment for joining the KSM Internet of Things in 2024.</strong></p>
+                    
+                    <p style="color: var(--accent-cyan); margin-bottom: 5px; font-weight: 600;">Technical Highlights:</p>
+                    <ul style="margin-left: 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+                        <li>Modernized information hierarchy for better readability and navigation.</li>
+                        <li>Designed an aesthetically pleasing, student-centric interface workflow using Figma.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+            <!-- ================================================== -->
+            <!-- FULLSCREEN POSTER LIGHTBOX -->
+            <!-- ================================================== -->
+            <div class="poster-lightbox" id="poster-fullscreen" onclick="closePoster(event, this)">
+                <!-- Tombol X khusus buat close poster -->
+                <span class="close-poster" onclick="closePosterBtn()">&#10005;</span>
+                <!-- Pastikan nama file gambarnya sesuai dengan yang ada di folder lu -->
+                <img src="img/PosterHD.png" alt="Poster Deteksi Kebocoran Gas">
+            </div>
 
     <script>
         function reveal() {
@@ -529,6 +1508,7 @@
         }
         window.addEventListener("scroll", reveal);
         reveal();
+        
 
         // Script buat Live Clock
         function updateClock() {
@@ -543,6 +1523,86 @@
         // Update jam setiap 1 detik
         setInterval(updateClock, 1000);
         updateClock(); // Panggil sekali di awal biar gak nunggu 1 detik dulu
+
+        //Fungsi Untuk Switch Tabs Experience
+        function openTab(tabName) {
+            // Sembunyikan semua isi tab
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Hapus status 'active' dari semua tombol
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Tampilkan konten tab yang diklik dan kasih efek aktif di tombolnya
+            document.getElementById(tabName).classList.add('active');
+            document.querySelector(`.tab-btn[data-target="${tabName}"]`).classList.add('active');
+            
+            // Ubah warna scrollbar tergantung tab yang aktif (Cyan buat Work, Pink buat Org)
+            const scrollArea = document.querySelector(`#${tabName} .exp-scroll-area`);
+            if(scrollArea) {
+                if(tabName === 'work') {
+                    scrollArea.style.setProperty('scrollbar-color', 'var(--accent-cyan) rgba(255, 255, 255, 0.05)');
+                } else {
+                    scrollArea.style.setProperty('scrollbar-color', 'var(--accent-pink) rgba(255, 255, 255, 0.05)');
+                }
+            }
+        }
+        // --- SCRIPT UNTUK MODAL PROJECTS ---
+            function openModal(modalId) {
+                document.getElementById(modalId).classList.add('active');
+                document.body.style.overflow = 'hidden'; // Mengunci background agar tidak bisa di-scroll
+            }
+
+            function closeModalBtn(modalId) {
+                document.getElementById(modalId).classList.remove('active');
+                document.body.style.overflow = 'auto'; // Membuka kunci scroll background
+            }
+
+            function closeModal(event, element) {
+                // Menutup pop-up secara otomatis jika user mengklik area gelap di luar kotak modal
+                if (event.target === element) {
+                    element.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            }
+
+            // --- SCRIPT UNTUK SLIDER FOTO IoT ---
+            let currentSlide = 0;
+
+            function changeSlide(direction) {
+                const slides = document.querySelectorAll('#iot-slides .slide');
+                
+                // Hilangkan class active dari foto yang sedang tampil
+                slides[currentSlide].classList.remove('active');
+                
+                // Hitung index foto selanjutnya (bisa muter balik ke awal kalau udah mentok)
+                currentSlide = (currentSlide + direction + slides.length) % slides.length;
+                
+                // Tambahkan class active ke foto yang baru
+                slides[currentSlide].classList.add('active');
+            }
+
+
+            // --- SCRIPT UNTUK FULLSCREEN POSTER ---
+            function openPoster() {
+                document.getElementById('poster-fullscreen').classList.add('active');
+            }
+
+            function closePosterBtn() {
+                document.getElementById('poster-fullscreen').classList.remove('active');
+            }
+
+            function closePoster(event, element) {
+                // Kalau user klik di luar gambar (area hitam), poster otomatis ketutup
+                if (event.target === element) {
+                    element.classList.remove('active');
+                }
+            }
     </script>
 </body>
 </html>
