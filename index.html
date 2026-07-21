@@ -942,40 +942,54 @@
                 transform: scale(1.1);
             }
 
-            /* --- CSS BARU UNTUK SCROLL HORIZONTAL FOTOGRAFI --- */
+           /* --- CSS BARU UNTUK SCROLL HORIZONTAL FOTOGRAFI --- */
             .photo-scroll-wrapper {
                 display: flex;
                 gap: 20px;
                 overflow-x: auto;
                 padding-bottom: 20px;
-                scroll-snap-type: x mandatory; /* Bikin gesernya nge-snap rapi */
+                
+                /* 1. Ganti mandatory jadi proximity agar tidak terlalu memaksa di layar besar */
+                scroll-snap-type: x proximity; 
+                
+                /* 2. Tambahkan ini biar momentum scroll di HP lebih mulus (native feel) */
+                -webkit-overflow-scrolling: touch; 
             }
 
             /* Kustomisasi bentuk Scrollbar biar matching sama tema */
-            .photo-scroll-wrapper::-webkit-scrollbar { height: 8px; }
+            .photo-scroll-wrapper::-webkit-scrollbar { height: 13px; }
             .photo-scroll-wrapper::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
             .photo-scroll-wrapper::-webkit-scrollbar-thumb { background: var(--accent-pink); border-radius: 10px; }
             .photo-scroll-wrapper::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
 
             .photo-scroll-item {
-                flex: 0 0 auto; /* Biar elemennya gak maksa mengecil */
-                height: 450px; /* Tinggi disamaratakan */
+                flex: 0 0 auto; 
+                height: 450px; 
                 width: max-content; 
-                scroll-snap-align: start;
-                padding: 0 !important; /* Timpa padding dari bento-card */
+                
+                /* 3. Ubah dari start ke center biar pas berhentinya lebih pas di tengah layar */
+                scroll-snap-align: center; 
+                padding: 0 !important; 
             }
 
             /* Gambar akan ngikutin rasio aslinya secara natural */
             .photo-scroll-item img {
                 height: 100%;
-                width: auto; /* Lebar otomatis ngikutin tinggi */
+                width: auto; 
                 display: block;
                 object-fit: cover;
             }
 
             /* Sesuaikan tinggi buat layar HP */
             @media (max-width: 768px) {
-                .photo-scroll-item { height: 320px; }
+                .photo-scroll-item { 
+                    height: 320px; 
+                }
+                
+                /* 4. Matikan efek snapping sepenuhnya di HP agar scroll mengalir lancar bebas hambatan */
+                .photo-scroll-wrapper {
+                    scroll-snap-type: none; 
+                }
             }
     </style>
 </head>
