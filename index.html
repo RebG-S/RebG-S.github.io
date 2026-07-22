@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reby Jovanza | Portfolio</title>
+
+    <link rel="icon" type="image/png" href="img/favicon-96x96.png" sizes="96x96" />
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -100,7 +102,7 @@
         .card-intro p { color: var(--text-muted); line-height: 1.6; font-size: 1rem; }
         
         .card-photo { grid-column: span 1; grid-row: span 2; padding: 0; }
-        .card-photo img { width: 100%; height: 100%; object-fit: cover ; filter: grayscale(50%) contrast(1.2); transition: 0.5s; }
+        .card-photo img { width: 100%; height: 100%; object-fit: cover ; filter: grayscale(20%) contrast(1.2); transition: 0.5s; }
         .card-photo:hover img { filter: grayscale(0%); transform: scale(1.05); }
 
         /* --- TOMBOL DOWNLOAD CV --- */
@@ -461,92 +463,9 @@
             max-width: 800px; /* Biar gak terlalu lebar di layar laptop */
             margin: 0 auto;
         }
-
-        @media (max-width: 768px) {
-            
-             /* ... keep navbar compact & intro grid layout ... */
-            
-            /* Reset ukuran span biar numpuk rapi */
-            .card-intro, .card-photo, .card-clock, .card-tech { 
-                grid-column: span 1; 
-                grid-row: auto; 
-            }
-            
-            /* ... keep card-intro h1 size ... */
-
-            /* === THE FIX FOR THE PORTRAIT PHOTO === */
-            .card-photo { 
-                height: auto; /* Removestrict height: 250px; */
-                
-                /* Set aspect ratio portrait (Tinggi > Lebar) biar orangnya kelihatan full */
-                aspect-ratio: 9 / 16; /* atau pakai 3/4 if lebih prefer */
-                
-                /* Option: make it slightly narrower and center it within the stack */
-                width: 85%; /* Kurangin lebar biar tinggi orangnya gak terlalu melar */
-                margin: 0 auto; /* Tengahin posisi card-nya */
-                margin-bottom: 20px; /* Jarak bawah */
-                
-                padding: 0; /* Pastiin fotonya full mentok */
-            }
-            
-            /* Pastiin image-nya dapet posisi yang bener dari atas */
-            .card-photo img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover; /* Biar full, tapi kita atur aspect ratio card-nya */
-                object-position: top center; /* Paling penting: prioritasin tampilin bagian muka/kepala */
-            }
-            /* 1. Navbar dibikin lebih compact & muat di layar */
-            nav {
-                width: 90%;
-                padding: 10px 15px;
-                gap: 10px;
-                justify-content: center;
-                flex-wrap: wrap; /* Biar kalau kepanjangan dia turun ke bawah */
-                border-radius: 12px;
-            }
-            nav a { font-size: 0.75rem; padding: 5px; }
-
-            /* 2. Semua Bento Grid jadi 1 Kolom berjejer ke bawah */
-            .intro-grid, .gallery-grid { grid-template-columns: 1fr; }
-            
-            /* Reset ukuran span biar numpuk rapi */
-            .card-intro, .card-photo, .card-clock, .card-tech { 
-                grid-column: span 1; 
-                grid-row: auto; 
-            }
-            
-            /* 3. Penyesuaian Ukuran Teks & Tinggi Kotak */
-            .card-intro h1 { font-size: 2.1rem; }
-            .card-photo { height: 250px; } /* Foto dibikin lebih pendek dikit */
-            
-            /* 4. Experience Kotaknya Disesuaikan */
-            .exp-scroll-area { max-height: 400px; } /* Biar di HP scroll-nya gak kepanjangan */
-            .timeline-item { margin-bottom: 30px; }
-
-            /* 5. Contact Section - Tombol berjejer ke bawah biar gampang dipencet */
-            .contact-card { padding: 40px 20px; }
-            .contact-card h2 { font-size: 2rem; }
-            .contact-links { 
-                flex-direction: column; /* Tombol numpuk atas-bawah */
-                gap: 15px; 
-            }
-            .btn-contact { width: 100%; justify-content: center; } /* Tombol menuhin lebar layar */
-        }
-
-        /* --- Layar HP Kecil Banget (Max 480px) --- */
-        @media (max-width: 480px) {
-            section { padding-top: 110px; padding-bottom: 20px; } /* Jarak atas ditambahin dikit buat navbar */
-            .card-intro h1 { font-size: 1.8rem; }
-            .digital-time { font-size: 1.5rem; }
-        }
            
 
-
-
-    
-
-        /* Custom Scrollbar ala City Pop / Tech */
+            /* Custom Scrollbar ala City Pop / Tech */
         .exp-scroll-area::-webkit-scrollbar { width: 6px; }
         .exp-scroll-area::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
         .exp-scroll-area::-webkit-scrollbar-thumb { background: var(--accent-cyan); border-radius: 10px; }
@@ -592,24 +511,36 @@
 
         footer { text-align: center; padding: 30px; color: var(--text-muted); font-size: 0.8rem; border-top: 1px solid var(--bento-border); margin-top: 50px; }
 
-        /* --- RESPONSIVE --- */
+    
         /* =========================================
            RESPONSIVE & MOBILE OPTIMIZATION
            ========================================= */
            
         /* --- Layar Tablet / Laptop Kecil (Max 900px) --- */
-        @media (max-width: 900px) {
-            .intro-grid { grid-template-columns: 1fr 1fr; }
-            .card-intro { grid-column: span 2; }
-            .card-photo { grid-column: span 2; height: 300px; }
-            .projects-grid, .exp-container { grid-template-columns: 1fr; }
-            /* Gallery di tablet jadi 2 kolom biar gak ketuaan/kekecilan */
+               @media (max-width: 1000px) {
+            .intro-grid { grid-template-columns: 1fr 1fr; } 
+            .card-intro { grid-column: span 2; } 
+            
+            /* FIX FOTO: Buang height tetapnya, ganti pakai rasio biar foto gak kepotong aneh */
+            .card-photo { 
+                grid-column: span 2; 
+                height: auto;
+                object-position: 50% 35%; 
+                aspect-ratio: 16 / 9; /* Bikin fotonya memanjang kayak banner cinematic */
+            }
+            
+            /* FIX PROJECTS: Bikin jadi 2 kolom di tablet biar kartunya gak raksasa banget */
+            .projects-grid { grid-template-columns: repeat(2, 1fr); } 
+            
+            .exp-container { grid-template-columns: 1fr; }
+            
+            /* Gallery udah aman 2 kolom dari settingan lu */
             .gallery-grid { grid-template-columns: repeat(2, 1fr); } 
         }
 
         /* --- Layar HP (Max 768px) --- */
         @media (max-width: 768px) {
-                       /* ... keep navbar compact & intro grid layout ... */
+            /* ... keep navbar compact & intro grid layout ... */
             
             /* Reset ukuran span biar numpuk rapi */
             .card-intro, .card-photo, .card-clock, .card-tech { 
@@ -624,13 +555,13 @@
                 height: auto; /* Removestrict height: 250px; */
                 
                 /* Set aspect ratio portrait (Tinggi > Lebar) biar orangnya kelihatan full */
-                aspect-ratio: 9 / 16; /* atau pakai 3/4 if lebih prefer */
+                aspect-ratio: 16 / 9 ; /* atau pakai 3/4 if lebih prefer */
                 
                 /* Option: make it slightly narrower and center it within the stack */
-                width: 85%; /* Kurangin lebar biar tinggi orangnya gak terlalu melar */
+                width: 100%; /* Kurangin lebar biar tinggi orangnya gak terlalu melar */
                 margin: 0 auto; /* Tengahin posisi card-nya */
                 margin-bottom: 20px; /* Jarak bawah */
-                
+                                
                 padding: 0; /* Pastiin fotonya full mentok */
             }
             
@@ -639,8 +570,8 @@
                 width: 100%;
                 height: 100%;
                 object-fit: cover; /* Biar full, tapi kita atur aspect ratio card-nya */
-                object-position: top center; /* Paling penting: prioritasin tampilin bagian muka/kepala */
-            }
+                object-position: 50% 37%; /* Paling penting: prioritasin tampilin bagian muka/kepala */
+            }        
             /* 1. Navbar dibikin lebih compact & muat di layar */
             nav {
                 width: 90%;
@@ -653,7 +584,7 @@
             nav a { font-size: 0.75rem; padding: 5px; }
 
             /* 2. Semua Bento Grid jadi 1 Kolom berjejer ke bawah */
-            .intro-grid, .gallery-grid { grid-template-columns: 1fr; }
+            .intro-grid, .projects-grid, .gallery-grid { grid-template-columns: 1fr; }
             
             /* Reset ukuran span biar numpuk rapi */
             .card-intro, .card-photo, .card-clock, .card-tech { 
@@ -679,7 +610,7 @@
             .btn-contact { width: 100%; justify-content: center; } /* Tombol menuhin lebar layar */
         }
 
-        /* --- Layar HP Kecil Banget (Max 480px) --- */
+        /*  Layar HP (Max 480px) --- */
         @media (max-width: 480px) {
             section { padding-top: 110px; padding-bottom: 20px; } /* Jarak atas ditambahin dikit buat navbar */
             .card-intro h1 { font-size: 1.8rem; }
@@ -978,7 +909,9 @@
                 width: auto; 
                 display: block;
                 object-fit: cover;
-            }
+                user-select: none;
+                -webkit-user-drag: none;
+                }
 
             /* Sesuaikan tinggi buat layar HP */
             @media (max-width: 768px) {
@@ -1001,7 +934,7 @@
         <a href="#projects">Projects</a>
         <!-- <a href="#research">Research</a> -->
         <a href="#gallery">Gallery</a>
-        <a href="#photography">Photography</a>
+        <a href="#captures">Captures</a>
         <a href="#contact">Contact</a>
     </nav>
 
@@ -1015,7 +948,7 @@
             </div>
 
             <div class="bento-card card-photo">
-                <img src="img/DSC01696.JPG" alt="Street Photography Vibe">
+                <img src="img/IMG_main.png" alt="PP">
             </div>
 
           <div class="bento-card card-clock">
@@ -1318,15 +1251,15 @@
     </section>
 
     <!-- SECTION BARU: PHOTOGRAPHY (HORIZONTAL SCROLL) -->
-    <section id="photography">
-        <span class="section-tag">Photography</span>
+    <section id="captures">
+        <span class="section-tag">Captures</span>
         <div class="photo-scroll-wrapper reveal">
             
             <!-- FOTO 1: Vespa City Pop (Potret) -->
             <div class="bento-card gallery-hover photo-scroll-item">
                 <img src="img/vespa1.jpg" alt="Vespa City Pop Night">
                 <div class="gallery-overlay">
-                    <span class="gallery-text">Night Vibe</span>
+                    <span class="gallery-text">Vespa</span>
                 </div>
             </div>
 
@@ -1350,7 +1283,7 @@
             <div class="bento-card gallery-hover photo-scroll-item">
                 <img src="img/dariblokm1.jpg" alt="blokM">
                 <div class="gallery-overlay">
-                    <span class="gallery-text">City</span>
+                    <span class="gallery-text">City Lights</span>
                 </div>
             </div>
 
@@ -1365,7 +1298,7 @@
             <div class="bento-card gallery-hover photo-scroll-item">
                 <img src="img/thamrin2.jpg" alt="Thamrin">
                 <div class="gallery-overlay">
-                    <span class="gallery-text">Urban</span>
+                    <span class="gallery-text">Urban Night</span>
                 </div>
             </div>
 
@@ -1397,7 +1330,7 @@
         <div class="bento-card contact-card reveal">
             <span class="mono" style="color: var(--accent-cyan); font-size: 1.2rem;"> Reby Jovanza Guestfint</span>
             <h2 style="font-size: 2.5rem; margin: 20px 0;">Let's Connect</h2>
-            <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">Currently open for new opportunities. Whether you have a question about my hardware projects, code, or just want to talk about aesthetics, my inbox is open.</p>
+            <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">Currently open to new opportunities. Whether it's engineering, creative work, photography, or simply exchanging ideas, feel free to reach out. I'd love to connect.</p>
             
             <div class="contact-links">
                 <a href="mailto:rebyjovanza@gmail.com" class="btn-contact"><i class="fas fa-envelope"></i> Email</a>
@@ -1617,6 +1550,7 @@
                     element.classList.remove('active');
                 }
             }
+            
     </script>
 </body>
 </html>
