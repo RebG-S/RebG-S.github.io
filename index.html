@@ -181,12 +181,12 @@
 
         /* --- SECTION 2: PROJECTS --- */
        .projects-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+            display: grid; grid-template-columns: repeat(3, 2fr); gap: 20px;
         }
 
         /* Pastikan proj-img punya position: relative buat nahan overlay */
         .proj-img { 
-            height: 180px; width: 100%; border-radius: 12px; margin-bottom: 20px; 
+            height: 180px; width: 100%; border-radius: 9px; margin-bottom: 20px; 
             overflow: hidden; position: relative; 
         }
 
@@ -682,16 +682,29 @@
         }
         .modal-overlay.active { opacity: 1; visibility: visible; }
 
-            .modal-content {
+         .modal-content {
             background: var(--bg-main); border: 1px solid var(--accent-cyan);
             border-radius: 16px; width: 90%; max-width: 650px; padding: 30px;
             position: relative; transform: translateY(30px); transition: 0.4s ease;
             box-shadow: 0 10px 40px rgba(0, 229, 255, 0.15);
             /* overflow-y dihapus dari sini biar tombol X di luar gak kepotong */
+        
+        max-height: 85vh; /* Membatasi tinggi maksimal kotak sebesar 85% dari tinggi layar */
+        display: flex;
+        flex-direction: column;
         }
-        .modal-overlay.active .modal-content { transform: translateY(0); }
 
-    
+        .modal-body {
+        overflow-y: auto; /* Membuat konten di dalamnya bisa di-scroll */
+        padding-right: 15px; /* Memberi ruang agar scrollbar tidak menempel ke teks */
+        padding-left: 15px;
+        }
+        /* 3. (Opsional) Styling scrollbar khusus area modal agar matching dengan tema */
+        .modal-body::-webkit-scrollbar { width: 3px; }
+        .modal-body::-webkit-scrollbar-track { background: transparent; }
+        .modal-body::-webkit-scrollbar-thumb { background: var(--accent-cyan); border-radius: 10px; }
+
+      
         /* Tombol X Mengambang di Luar */
         .close-modal {
             position: absolute; 
@@ -764,7 +777,7 @@
             width: 100%; 
             max-width: 100%; 
             object-fit: cover; 
-            border: 12px; /* Menghilangkan frame/garis luarnya */
+            border-radius: 12px; /* Menghilangkan frame/garis luarnya */
             background: transparent; 
         }
         .modal-body h3 { font-size: 1.5rem; margin-bottom: 5px; color: var(--text-main); }
@@ -1008,16 +1021,16 @@
                         <li>Configured and tested TI XWR1443 BOOST and uRAD AWR1843 radar platforms.</li>
                         <li>Analyzed experimental data and prepared technical documentation for biomedical sensing research.</li>
                     </ul>
-                        <div class="exp-photo-grid">
+                        <!-- <div class="exp-photo-grid">
                             <img src="img/imgbrin-1.png" alt="BRIN Activity 1">
                             <img src="img/imgbrin-2.png" alt="BRIN Radar Testing">
                             <img src="img/imgbrin-3.png" alt="BRIN Lab Work">
                             <img src="img/imgbrin-4.png" alt="BRIN Data Analysis">
                         </div>
-                        <div class="exp-buttons">
-                            <a href="https://drive.google.com/file/d/1aGxGFVmpPfiqyBF_1fTjN9sa_8p7aNgw/view?usp=sharing" target="_blank" class="btn-doc">📜 Certificate</a>
+                         <div class="exp-buttons">
+                           <a href="https://drive.google.com/file/d/1aGxGFVmpPfiqyBF_1fTjN9sa_8p7aNgw/view?usp=sharing" target="_blank" class="btn-doc">📜 Certificate</a>
                             <a href="https://drive.google.com/file/d/1YuiJNRdAXxrU0BXecrcXGBzV6UmaXPps/view?usp=sharing" target="_blank" class="btn-doc">📑 Evaluation Letter</a>
-                        </div>
+                        </div>-->
 
                     </div>
                     <!-- KARTU FREELANCE -->
@@ -1156,8 +1169,24 @@
     <section id="projects">
     <span class="section-tag">Projects</span>
     <div class="projects-grid reveal">
+
+
+
+        <!-- Kartu 1: Network Telemetry -->
+            <div class="bento-card" onclick="openModal('modal-telemetry')">
+                <div class="proj-img">
+                    <img src="img/Group 1196ss.png" alt="Telemetry Dashboard">
+                    <div class="proj-overlay">
+                        <span class="proj-text"><i class="fas fa-search-plus"></i> Click for Details</span>
+                    </div>
+                </div>
+                <h3>Network Telemetry & Dashboard</h3>
+                <p class="mono" style="color: var(--accent-pink); font-size: 0.8rem; margin-bottom: 10px;">[Cisco SF-300 / Python / InfluxDB / Grafana]</p>
+                <p class="desc">A lightweight telemetry system bridging physical hardware with modern time-series visualization to track live bandwidth utilization without heavy CLI overhead.</p>
+            </div>
+
         
-        <!-- Kartu 1: Cisco -->
+        <!-- Kartu 2: Cisco -->
             <div class="bento-card" onclick="openModal('modal-port-sec')">
                 <div class="proj-img"><img src="img/SF300-Dashboard.png" alt="Cisco">
                     <div class="proj-overlay">
@@ -1166,10 +1195,22 @@
                 </div>
                 <h3>Port Security Automation</h3>
                 <p class="mono" style="color: var(--accent-pink); font-size: 0.8rem; margin-bottom: 10px;">[Cisco SF-300 / Python]</p>
-                <p class="desc">A Python-powered Custom Web Dashboard utilizing Netmiko to automate Layer 2 Port Security, enabling efficient 1-click access control.</p>
+                <p class="desc">>A custom web-based dashboard utilizing Python and Netmiko to simplify and automate Layer 2 network security protocols, including manual MAC address whitelisting.</p>
             </div>
 
-            <!-- Kartu 2: IoT -->
+            <!-- Kartu 3: Mikrotik -->
+            <div class="bento-card" onclick="openModal('modal-mikrotik')">
+                <div class="proj-img"><img src="img/Group 1195.png" alt="MikroTik Configurations">
+                    <div class="proj-overlay">
+                        <span class="proj-text"><i class="fas fa-search-plus"></i> Click for Details</span>
+                       </div> 
+                </div>
+                <h3>MikroTik Network Segmentation & Firewall Lab</h3>
+                <p class="mono" style="color: var(--accent-pink); font-size: 0.8rem; margin-bottom: 10px;">[RouterOS / VLAN / Layer 3 Firewall]</p>
+                <p class="desc">A network segmentation lab implementing dual VLANs, Inter-VLAN routing, DHCP, and firewall filtering to isolate trusted and untrusted segments while maintaining internet access through NAT.
+            </div>
+
+            <!-- Kartu 3: IoT -->
             <div class="bento-card" onclick="openModal('modal-iot')">
                 <div class="proj-img"><img src="img/BoxGasDetector.png" alt="IoT">
                     <div class="proj-overlay">
@@ -1181,7 +1222,21 @@
                 <p class="desc">An autonomous IoT safety system featuring router-independent M2M communication to automatically trip electrical breakers during emergencies.</p>
             </div>
 
-            <!-- Kartu 3: SIAKAD -->
+             <!-- Kartu 4: Legacy Router Security Bot -->
+            <div class="bento-card" onclick="openModal('modal-router-bot')">
+                <div class="proj-img">
+                    <!-- Ganti src dengan screenshot bot / topologi router kamu -->
+                    <img src="img/Group 1143.png" alt="Legacy Router Security Bot">
+                    <div class="proj-overlay">
+                        <span class="proj-text"><i class="fas fa-search-plus"></i> Click for Details</span>
+                    </div>
+                </div>
+                <h3>Legacy Router Security Bot</h3>
+                <p class="mono" style="color: var(--accent-pink); font-size: 0.8rem; margin-bottom: 10px;">[Linksys E900 / Python / Telegram API]</p>
+                <p class="desc">A Telegram bot utilizing HTTP reverse-engineering to bypass legacy hardware limits, enabling live network monitoring and 1-click MAC filtering.</p>           
+                </div>
+
+            <!-- Kartu 5: SIAKAD -->
             <div class="bento-card" onclick="openModal('modal-siakad')">
                 <div class="proj-img"><img src="img/SiakadFigma.png" alt="SIAKAD">
                     <div class="proj-overlay">
@@ -1192,6 +1247,10 @@
                 <p class="mono" style="color: var(--accent-pink); font-size: 0.8rem; margin-bottom: 10px;">[Figma / UI-UX]</p>
                 <p class="desc">A comprehensive visual interface redesign of a campus academic portal, focused on modernizing information hierarchy.</p>
             </div>
+
+           
+
+            
 
         </div>
     </section>
@@ -1356,6 +1415,7 @@
                     <ul style="margin-left: 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
                         <li>Implemented Python and Netmiko to push automated CLI configurations.</li>
                         <li>Created an intuitive GUI for 1-click access control.</li>
+                        <li>Integrated manual MAC address input functionality to dynamically update the network whitelist.</li>
                     </ul>
                 </div>
             </div>
@@ -1399,8 +1459,41 @@
                         <li>Integrated an MQ6 sensor for LPG detection and a speaker for local voice alerts.</li>
                         <li>Engineered a motorized servo mechanism to physically trip the MCB switch, cutting house electricity during emergencies.</li>
                         <li>Implemented the CallMeBot API to send real-time emergency notifications via WhatsApp.</li>
-                        <li>Successfully managed project lifecycle and budget allocation to deliver a fully functional prototype.</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal 3: MIKROTIK -->
+        <div class="modal-overlay" id="modal-mikrotik" onclick="closeModal(event, this)">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModalBtn('modal-mikrotik')">&#10005;</span>
+            
+            <div class="modal-body">
+                
+                <div class="modal-slider">
+                    <div class="slides" id="mikrotik-slides">
+                        <img src="img/Group 1195.png" class="slide active" alt="MikroTik Topologi">
+                        <img src="img/Group 119ccc6.png" class="slide" alt="MikroTik Graphing">
+                    </div>
+                    <button class="slider-btn prev" onclick="changeSlideMikrotik(-1)">&#10094;</button>
+                    <button class="slider-btn next" onclick="changeSlideMikrotik(1)">&#10095;</button>
+                </div>
+                                    
+                <div class="modal-header-flex">
+                    <h3>MikroTik Network Segmentation & Firewall</h3>
+                </div>
+                
+                <span class="mono" style="color: var(--accent-pink); font-size: 0.85rem; margin-bottom: 20px; display: inline-block;">[RouterOS / VLAN / Layer 3 Firewall]</span>
+                    
+                <p>A network lab focused on segmenting traffic using dual VLANs, establishing secure Inter-VLAN routing, and configuring NAT for internet access while isolating trusted and untrusted environments.</p>
+                
+                <p style="color: var(--accent-cyan); margin-bottom: 5px; font-weight: 600;">Technical Highlights:</p>
+                <ul style="margin-left: 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+                    <li><strong>VLAN & Routing:</strong> Configured dual VLANs with Inter-VLAN routing and automated DHCP provisioning.</li>
+                    <li><strong>Firewall & Security:</strong> Implemented Layer 3 firewall filtering to restrict traffic between segments and configured Source NAT (src-nat) for secure internet connectivity.</li>
+                    <li><strong>Traffic Monitoring:</strong> Tracked interface bandwidth utilization using MikroTik's native graphing tools.</li>
+                </ul>
                 </div>
             </div>
         </div>
@@ -1433,8 +1526,7 @@
                 </div>
             </div>
         </div>
-
-            <!-- ================================================== -->
+       
             <!-- FULLSCREEN POSTER LIGHTBOX -->
             <!-- ================================================== -->
             <div class="poster-lightbox" id="poster-fullscreen" onclick="closePoster(event, this)">
@@ -1443,6 +1535,52 @@
                 <!-- Pastikan nama file gambarnya sesuai dengan yang ada di folder lu -->
                 <img src="img/PosterHD.png" alt="Poster Deteksi Kebocoran Gas">
             </div>
+
+            <!-- Modal 4: Legacy Router Security Bot -->
+        <div class="modal-overlay" id="modal-router-bot" onclick="closeModal(event, this)">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeModalBtn('modal-router-bot')">&#10005;</span>
+                <div class="modal-body">
+                    <!-- Image Showcase -->
+                    <img src="img/Group 1143.png" alt="Legacy Router Security Bot Architecture">
+                    
+                    <h3>Legacy Router Security Bot</h3>
+                    <span class="mono" style="color: var(--accent-pink); font-size: 0.85rem; margin-bottom: 20px; display: inline-block;">[Linksys E900 / Python / Telegram API]</span>
+                    
+                    <p>Designed and deployed a lightweight automation bot to modernize network management on legacy Linksys E900 hardware, overcoming stock firmware constraints without flashing custom ROMs.</p>
+                    
+                    <p style="color: var(--accent-cyan); margin-bottom: 5px; font-weight: 600;">Technical Highlights:</p>
+                    <ul style="margin-left: 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+                         <li><strong>HTTP Reverse-Engineering:</strong> Replicated session tokens and POST requests for programmatic router authentication and control.</li>
+                        <li><strong>Telegram Automation:</strong> Enabled 1-click Wireless MAC Filtering (allow/block) via interactive chat keyboards.</li>
+                        <li><strong>Live Intrusion Alerts:</strong> Parsed raw router client tables into formatted, periodic Telegram notifications.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal 5: Network Telemetry -->
+        <div class="modal-overlay" id="modal-telemetry" onclick="closeModal(event, this)">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeModalBtn('modal-telemetry')">&#10005;</span>
+                <div class="modal-body">
+                    <!-- Sesuaikan dengan gambar arsitektur/dashboard lu -->
+                    <img src="img/Group 1196ss.png" alt="Cisco Telemetry Architecture">
+                    
+                    <h3>Real-Time Network Telemetry</h3>
+                    <span class="mono" style="color: var(--accent-pink); font-size: 0.85rem; margin-bottom: 20px; display: inline-block;">[Cisco / Python / InfluxDB / Grafana]</span>
+                    
+                    <p>Developed an end-to-end network telemetry monitoring system to track live bandwidth utilization (RX/TX) on specific switch ports, bridging legacy hardware with modern time-series visualization.</p>
+                    
+                    <p style="color: var(--accent-cyan); margin-bottom: 5px; font-weight: 600;">Technical Highlights:</p>
+                    <ul style="margin-left: 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+                        <li><strong>Data Collection:</strong> Built an async Python worker using SNMP v2c to efficiently poll switch interface metrics.</li>
+                        <li><strong>Data Storage:</strong> Configured InfluxDB to securely ingest, structure, and store high-frequency network metrics.</li>
+                        <li><strong>Visualization:</strong> Designed an enterprise-ready Grafana dashboard with real-time gauges, historical trends, and automatic unit conversions.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
     <script>
         function reveal() {
@@ -1532,6 +1670,22 @@
                 
                 // Tambahkan class active ke foto yang baru
                 slides[currentSlide].classList.add('active');
+            }
+
+            // --- SCRIPT UNTUK SLIDER FOTO MIKROTIK ---
+            let currentSlideMikrotik = 0;
+
+            function changeSlideMikrotik(direction) {
+                const slides = document.querySelectorAll('#mikrotik-slides .slide');
+                
+                // Hilangkan class active dari foto yang sedang tampil
+                slides[currentSlideMikrotik].classList.remove('active');
+                
+                // Hitung index foto selanjutnya
+                currentSlideMikrotik = (currentSlideMikrotik + direction + slides.length) % slides.length;
+                
+                // Tambahkan class active ke foto yang baru
+                slides[currentSlideMikrotik].classList.add('active');
             }
 
 
