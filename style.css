@@ -876,54 +876,119 @@
                 transform: scale(1.1);
             }
 
-           /* --- CSS BARU UNTUK SCROLL HORIZONTAL FOTOGRAFI --- */
-            .photo-scroll-wrapper {
-                display: flex;
-                gap: 20px;
-                overflow-x: auto;
-                padding-bottom: 20px;
-                
-                /* 1. Ganti mandatory jadi proximity agar tidak terlalu memaksa di layar besar */
-                scroll-snap-type: x proximity; 
-                
-                /* 2. Tambahkan ini biar momentum scroll di HP lebih mulus (native feel) */
-                -webkit-overflow-scrolling: touch; 
+           /* --- TABS KHUSUS GALLERY --- */
+            .tab-btn-gallery {
+                background: transparent;
+                border: none;
+                color: var(--text-muted);
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 1.1rem;
+                font-weight: 600;
+                padding: 10px 20px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                position: relative;
             }
 
-            /* Kustomisasi bentuk Scrollbar biar matching sama tema */
-            .photo-scroll-wrapper::-webkit-scrollbar { height: 13px; }
-            .photo-scroll-wrapper::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
-            .photo-scroll-wrapper::-webkit-scrollbar-thumb { background: var(--accent-pink); border-radius: 10px; }
-            .photo-scroll-wrapper::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
+            .tab-btn-gallery:hover { color: var(--text-main); }
+            .tab-btn-gallery.active[data-target="designs-tab"] { color: var(--accent-cyan); }
+            .tab-btn-gallery.active[data-target="captures-tab"] { color: var(--accent-pink); }
 
-            .photo-scroll-item {
-                flex: 0 0 auto; 
-                height: 450px; 
-                width: max-content; 
-                
-                /* 3. Ubah dari start ke center biar pas berhentinya lebih pas di tengah layar */
-                scroll-snap-align: center; 
-                padding: 0 !important; 
+            .tab-btn-gallery::after {
+                content: ''; position: absolute; bottom: -11px; left: 0; width: 0%; height: 2px; transition: width 0.3s ease;
             }
 
-            /* Gambar akan ngikutin rasio aslinya secara natural */
-            .photo-scroll-item img {
-                height: 100%;
-                width: auto; 
+            .tab-btn-gallery.active[data-target="designs-tab"]::after { width: 100%; background: var(--accent-cyan); box-shadow: 0 0 10px var(--accent-cyan); }
+            .tab-btn-gallery.active[data-target="captures-tab"]::after { width: 100%; background: var(--accent-pink); box-shadow: 0 0 10px var(--accent-pink); }
+
+            .tab-content-gallery {
+                display: none;
+                animation: smoothFadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            }
+            .tab-content-gallery.active { display: block; }
+
+            @keyframes smoothFadeIn {
+                0% { opacity: 0; transform: translateY(15px); }
+                100% { opacity: 1; transform: translateY(0); }
+            }
+
+            /* --- MASONRY LAYOUT UNTUK CAPTURES --- */
+            .captures-masonry {
+                column-count: 3; /* Dibagi 3 kolom di PC */
+                column-gap: 20px;
+                padding-top: 10px;
+            }
+
+            .masonry-item {
+                break-inside: avoid; /* Mencegah gambar terpotong di tengah pindah kolom */
+                margin-bottom: 20px; /* Jarak antar foto dari atas ke bawah */
                 display: block;
-                object-fit: cover;
-                user-select: none;
-                -webkit-user-drag: none;
-                }
+                width: 100%;
+            }
 
-            /* Sesuaikan tinggi buat layar HP */
-            @media (max-width: 768px) {
-                .photo-scroll-item { 
-                    height: 320px; 
-                }
-                
-                /* 4. Matikan efek snapping sepenuhnya di HP agar scroll mengalir lancar bebas hambatan */
-                .photo-scroll-wrapper {
-                    scroll-snap-type: none; 
-                }
+            /* Responsive Tabs & Masonry */
+            @media (max-width: 900px) {
+                .captures-masonry { column-count: 2; }
+            }
+
+            @media (max-width: 768px){
+                .tab-btn-gallery::after { display: none; } 
+                .tab-btn-gallery { border: 1px solid var(--bento-border); border-radius: 8px; }
+                .tab-btn-gallery.active[data-target="designs-tab"] { background: rgba(0, 229, 255, 0.1); border-color: var(--accent-cyan); }
+                .tab-btn-gallery.active[data-target="captures-tab"] { background: rgba(255, 126, 212, 0.1); border-color: var(--accent-pink); }
+                .captures-masonry { column-count: 1; }
+            }
+            /* --- TABS KHUSUS GALLERY --- */
+            .tab-btn-gallery {
+                background: transparent;
+                border: none;
+                color: var(--text-muted);
+                font-family: 'JetBrains Mono', monospace;
+                font-size: 1.1rem;
+                font-weight: 600;
+                padding: 10px 20px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                position: relative;
+            }
+
+            .tab-btn-gallery:hover { color: var(--text-main); }
+
+            /* Status Aktif Tombol Gallery */
+            .tab-btn-gallery.active[data-target="designs-tab"] { color: var(--accent-cyan); }
+            .tab-btn-gallery.active[data-target="captures-tab"] { color: var(--accent-pink); }
+
+            .tab-btn-gallery::after {
+                content: '';
+                position: absolute;
+                bottom: -11px;
+                left: 0;
+                width: 0%;
+                height: 2px;
+                transition: width 0.3s ease;
+            }
+
+            .tab-btn-gallery.active[data-target="designs-tab"]::after {
+                width: 100%;
+                background: var(--accent-cyan);
+                box-shadow: 0 0 10px var(--accent-cyan);
+            }
+
+            .tab-btn-gallery.active[data-target="captures-tab"]::after {
+                width: 100%;
+                background: var(--accent-pink);
+                box-shadow: 0 0 10px var(--accent-pink);
+            }
+
+           /* Konten Tab Gallery */
+            .tab-content-gallery {
+                display: none;
+                /* Menggunakan cubic-bezier agar transisinya lebih smooth dan natural */
+                animation: smoothFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            }
+            .tab-content-gallery.active { display: block; }
+
+            @keyframes smoothFadeIn {
+                0% { opacity: 0; transform: translateY(15px); }
+                100% { opacity: 1; transform: translateY(0); }
             }

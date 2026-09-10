@@ -21,7 +21,7 @@
         <a href="#projects">Projects</a>
         <!-- <a href="#research">Research</a> -->
         <a href="#gallery">Gallery</a>
-        <a href="#captures">Captures</a>
+        <!--<a href="#captures">Captures</a> -->
         <a href="#contact">Contact</a>
     </nav>
 
@@ -68,7 +68,7 @@
     <section id="experience">
         <span class="section-tag">Experience</span>
         
-        <div class="exp-bento-wrapper reveal">
+        <div class="exp-bento-wrapper">
             <!-- TAB HEADERS (Tombol Navigasi) -->
             <div class="tabs-header">
                 <button class="tab-btn active" data-target="work" onclick="openTab('work')">
@@ -330,132 +330,110 @@
     </section>
 
      
-    <section id="gallery">
-        <span class="section-tag">Gallery Design</span>
-        <div class="gallery-grid reveal">
+   <section id="gallery">
+        <span class="section-tag">Creative Works</span>
+        
+        <!-- Wadah Bento Besar -->
+        <div class="exp-bento-wrapper reveal">
             
-            <!-- YUBAWAREHOUSE 1: serafim -->
-            <a href="https://www.instagram.com/p/DG2rQzoJ3uF/?img_index=1" target="_blank" class="bento-card gallery-item gallery-hover">
-                <img src="img/lesserafim.webp" alt="Yubawarehouse"loading="lazy">
-                <div class="gallery-overlay">
-                    <span class="gallery-text">Instagram Post: Yubawarehouse</span>
-                </div>
-            </a>
-
-            <!--IOT BIRU SSH  -->
-            <a href="https://www.instagram.com/p/DNhmWKxR3UT/?img_index=1" target="_blank" class="bento-card gallery-item gallery-hover">
-                <img src="img/COVER NETWORK.webp" alt="IoT"loading="lazy">
-                <div class="gallery-overlay">
-                    <span class="gallery-text">Instagram Post: KSM IoT UPNVJ</span>
-                </div>
-            </a>
-
-             <!-- HMTE MMWAVE -->
-            <a href="https://www.instagram.com/p/DRmJeCeE3TQ/?img_index=7" target="_blank" class="bento-card gallery-item gallery-hover">
-                <img src="img/GD4.webp" alt="HMTE"loading="lazy">
-                <div class="gallery-overlay">
-                    <span class="gallery-text">Instagram Post: HMTE UPNVJ</span>
-                </div>
-            </a>
-
-            <a href="https://www.instagram.com/p/DR69WZIE5U5/?img_index=6" target="_blank" class="bento-card gallery-item gallery-hover">
-            <img src="img/GD1.webp" alt="Design 1"loading="lazy">
-            <div class="gallery-overlay">
-                <span class="gallery-text">Instagram Post: HMTE UPNVJ</span>
+            <!-- TABS HEADER -->
+            <div class="tabs-header">
+                <button class="tab-btn-gallery active" data-target="designs-tab" onclick="openGalleryTab('designs-tab')">
+                    <i class="fas fa-pen-nib"></i> Gallery Design
+                </button>
+                <button class="tab-btn-gallery" data-target="captures-tab" onclick="openGalleryTab('captures-tab')">
+                    <i class="fas fa-camera"></i> Captures
+                </button>
             </div>
-        </a>
 
-            <!-- DESAIN KOMISI 3 -->
-                <a href="img/eos2.webp" target="_blank" class="bento-card gallery-item gallery-hover">
-                    <img src="img/eos2.webp" alt="Design 3"loading="lazy">
-                    <div class="gallery-overlay">
-                        <span class="gallery-text">Personal Project</span>
+            <!-- TAB 1: DESIGNS (Tampilan Grid Biasa) -->
+            <div id="designs-tab" class="tab-content-gallery active">
+                <div class="gallery-grid">
+                    <!-- YUBAWAREHOUSE -->
+                    <a href="https://www.instagram.com/p/DG2rQzoJ3uF/?img_index=1" target="_blank" class="bento-card gallery-item gallery-hover">
+                        <img src="img/lesserafim.webp" alt="Yubawarehouse" loading="lazy">
+                        <div class="gallery-overlay"><span class="gallery-text">Instagram Post: Yubawarehouse</span></div>
+                    </a>
+                    <!-- IOT BIRU SSH  -->
+                    <a href="https://www.instagram.com/p/DNhmWKxR3UT/?img_index=1" target="_blank" class="bento-card gallery-item gallery-hover">
+                        <img src="img/COVER NETWORK.webp" alt="IoT" loading="lazy">
+                        <div class="gallery-overlay"><span class="gallery-text">Instagram Post: KSM IoT UPNVJ</span></div>
+                    </a>
+                    <!-- HMTE MMWAVE -->
+                    <a href="https://www.instagram.com/p/DRmJeCeE3TQ/?img_index=7" target="_blank" class="bento-card gallery-item gallery-hover">
+                        <img src="img/GD4.webp" alt="HMTE" loading="lazy">
+                        <div class="gallery-overlay"><span class="gallery-text">Instagram Post: HMTE UPNVJ</span></div>
+                    </a>
+                    <!-- HMTE 1 -->
+                    <a href="https://www.instagram.com/p/DR69WZIE5U5/?img_index=6" target="_blank" class="bento-card gallery-item gallery-hover">
+                        <img src="img/GD1.webp" alt="Design 1" loading="lazy">
+                        <div class="gallery-overlay"><span class="gallery-text">Instagram Post: HMTE UPNVJ</span></div>
+                    </a>
+                    <!-- DESAIN KOMISI 3 -->
+                    <a href="img/eos2.webp" target="_blank" class="bento-card gallery-item gallery-hover">
+                        <img src="img/eos2.webp" alt="Design 3" loading="lazy">
+                        <div class="gallery-overlay"><span class="gallery-text">Personal Project</span></div>
+                    </a>
+                    <!-- MINJI-1 -->
+                    <a href="https://www.instagram.com/p/DJVYeHVTO45/" target="_blank" class="bento-card gallery-item gallery-hover">
+                        <img src="img/Minj.webp" alt="Design 2" loading="lazy">
+                        <div class="gallery-overlay"><span class="gallery-text">Instagram Post: Yubawarehouse</span></div>
+                    </a>              
+                </div>
+            </div>
+
+            <!-- TAB 2: CAPTURES (Tampilan Masonry / Pinterest) -->
+            <div id="captures-tab" class="tab-content-gallery">
+                <div class="captures-masonry">
+                    
+                  <!--  <div class="bento-card gallery-hover masonry-item">
+                        <img src="img/vespa1.webp" alt="Vespa City Pop Night" loading="lazy">
+                        <div class="gallery-overlay"><span class="gallery-text">Vespa</span></div>
+                    </div>-->
+
+                    <div class="bento-card gallery-hover masonry-item">
+                        <img src="img/thamrin1.webp" alt="Jakarta Night Vibe" loading="lazy">
+                        <div class="gallery-overlay"><span class="gallery-text">Urban Night</span></div>
                     </div>
-                </a>
-            <!-- MINJI-1 -->
-                <a href="https://www.instagram.com/p/DJVYeHVTO45/" target="_blank" class="bento-card gallery-item gallery-hover">
-                    <img src="img/Minj.webp" alt="Design 2"loading="lazy">
-                    <div class="gallery-overlay">
-                        <span class="gallery-text">Instagram Post: Yubawarehouse</span>
+
+                    <div class="bento-card gallery-hover masonry-item">
+                        <img src="img/SX-4.webp" alt="SX4" loading="lazy">
+                        <div class="gallery-overlay"><span class="gallery-text">Automotive</span></div>
                     </div>
-                </a>              
-            </a>
-        </div>
-    </section>
 
-    <!-- SECTION BARU: PHOTOGRAPHY (HORIZONTAL SCROLL) -->
-    <section id="captures">
-        <span class="section-tag">Captures</span>
-        <div class="photo-scroll-wrapper reveal">
-            
-            <!-- FOTO 1: Vespa City Pop (Potret) -->
-            <div class="bento-card gallery-hover photo-scroll-item">
-                <img src="img/vespa1.webp" alt="Vespa City Pop Night"loading="lazy">
-                <div class="gallery-overlay">
-                    <span class="gallery-text">Vespa</span>
-                </div>
-            </div>
+                    <div class="bento-card gallery-hover masonry-item">
+                        <img src="img/dariblokm1.webp" alt="blokM" loading="lazy">
+                        <div class="gallery-overlay"><span class="gallery-text">City Lights</span></div>
+                    </div>
 
-            <!-- FOTO 2: Traffic Malam (Potret) -->
-            <div class="bento-card gallery-hover photo-scroll-item">
-                <img src="img/thamrin1.webp" alt="Jakarta Night Vibe"loading="lazy">
-                <div class="gallery-overlay">
-                    <span class="gallery-text"> Urban Night</span>
-                </div>
-            </div>
+                    <!--<div class="bento-card gallery-hover masonry-item">
+                        <img src="img/yaris1.webp" alt="Yaris" loading="lazy">
+                        <div class="gallery-overlay"><span class="gallery-text">Automotive</span></div>
+                    </div>-->
 
-            <!-- FOTO 3: Automotive (Lanskap utuh, gak kepotong!) -->
-            <div class="bento-card gallery-hover photo-scroll-item">
-                <img src="img/SX-4.webp" alt="SX4"loading="lazy">
-                <div class="gallery-overlay">
-                    <span class="gallery-text">Automotive</span>
-                </div>
-            </div>
+                    <div class="bento-card gallery-hover masonry-item">
+                        <img src="img/thamrin2.webp" alt="Thamrin" loading="lazy">
+                        <div class="gallery-overlay"><span class="gallery-text">Urban Night</span></div>
+                    </div>
 
-            <!-- FOTO 4: Automotive (Lanskap utuh, gak kepotong!) -->
-            <div class="bento-card gallery-hover photo-scroll-item">
-                <img src="img/dariblokm1.webp" alt="blokM"loading="lazy">
-                <div class="gallery-overlay">
-                    <span class="gallery-text">City Lights</span>
+                    <!--<div class="bento-card gallery-hover masonry-item">
+                        <img src="img/PJBL1.webp" alt="Documentation" loading="lazy">
+                        <div class="gallery-overlay"><span class="gallery-text">Documentation</span></div>
+                    </div>-->
+
+                    <div class="bento-card gallery-hover masonry-item">
+                        <img src="img/mosfet2.webp" alt="Documentation" loading="lazy">
+                        <div class="gallery-overlay"><span class="gallery-text">Documentation</span></div>
+                    </div>
+
+                    <div class="bento-card gallery-hover masonry-item">
+                        <img src="img/VGT1.webp" alt="Documentation" loading="lazy">
+                        <div class="gallery-overlay"><span class="gallery-text">Documentation</span></div>
+                    </div>
+
                 </div>
             </div>
 
-            <!-- FOTO 6: Automotive (Lanskap utuh, gak kepotong!) -->
-            <div class="bento-card gallery-hover photo-scroll-item">
-                <img src="img/yaris1.webp" alt="Yaris"loading="lazy">
-                <div class="gallery-overlay">
-                    <span class="gallery-text">Automotive</span>
-                </div>
-            </div>
-            <!-- FOTO 5: Automotive (Lanskap utuh, gak kepotong!) -->
-            <div class="bento-card gallery-hover photo-scroll-item">
-                <img src="img/thamrin2.webp" alt="Thamrin"loading="lazy">
-                <div class="gallery-overlay">
-                    <span class="gallery-text">Urban Night</span>
-                </div>
-            </div>
-
-            <!-- FOTO 7: Automotive (Lanskap utuh, gak kepotong!) -->
-            <div class="bento-card gallery-hover photo-scroll-item">
-                <img src="img/PJBL1.webp" alt="Documentation"loading="lazy">
-                <div class="gallery-overlay">
-                    <span class="gallery-text">Documentation</span>
-                </div>
-            </div>
-             <!-- FOTO 8: Automotive (Lanskap utuh, gak kepotong!) -->
-            <div class="bento-card gallery-hover photo-scroll-item">
-                <img src="img/mosfet2.webp" alt="Documentation"loading="lazy">
-                <div class="gallery-overlay">
-                    <span class="gallery-text">Documentation</span>
-                </div>
-            </div>
-            <!-- FOTO 8: Automotive (Lanskap utuh, gak kepotong!) -->
-            <div class="bento-card gallery-hover photo-scroll-item">
-                <img src="img/VGT1.webp" alt="Documentation"loading="lazy">
-                <div class="gallery-overlay">
-                    <span class="gallery-text">Documentation</span>
-                </div>
-            </div>
         </div>
     </section>
     
@@ -603,11 +581,8 @@
         </div>
        
             <!-- FULLSCREEN POSTER LIGHTBOX -->
-            <!-- ================================================== -->
             <div class="poster-lightbox" id="poster-fullscreen" onclick="closePoster(event, this)">
-                <!-- Tombol X khusus buat close poster -->
-                <span class="close-poster" onclick="closePosterBtn()">&#10005;</span>
-                <!-- Pastikan nama file gambarnya sesuai dengan yang ada di folder lu -->
+                <span class="close-poster" onclick="closePosterBtn()">&#10005;</span>                
                 <img src="img/PosterHD.webp" alt="Poster Deteksi Kebocoran Gas">
             </div>
 
@@ -615,8 +590,7 @@
         <div class="modal-overlay" id="modal-router-bot" onclick="closeModal(event, this)">
             <div class="modal-content">
                 <span class="close-modal" onclick="closeModalBtn('modal-router-bot')">&#10005;</span>
-                <div class="modal-body">
-                    <!-- Image Showcase -->
+                <div class="modal-body">                  
                     <img src="img/Group 1143.webp" alt="Legacy Router Security Bot Architecture">
                     
                     <h3>Legacy Router Security Bot</h3>
@@ -639,7 +613,6 @@
             <div class="modal-content">
                 <span class="close-modal" onclick="closeModalBtn('modal-telemetry')">&#10005;</span>
                 <div class="modal-body">
-                    <!-- Sesuaikan dengan gambar arsitektur/dashboard lu -->
                     <img src="img/Group 1196ss.webp" alt="Cisco Telemetry Architecture">
                     
                     <h3>Real-Time Network Telemetry</h3>
