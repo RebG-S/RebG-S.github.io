@@ -312,14 +312,14 @@
 
             <!-- Kartu 5: SIAKAD -->
             <div class="bento-card" onclick="openModal('modal-siakad')">
-                <div class="proj-img"><img src="img/SiakadFigma.webp" alt="SIAKAD"loading="lazy">
+                <div class="proj-img"><img src="img/streaml.webp" alt="SIAKAD"loading="lazy">
                     <div class="proj-overlay">
                         <span class="proj-text"><i class="fas fa-search-plus"></i> Click for Details</span>
                     </div>
                 </div>
-                <h3>SIAKAD Desktop UI Redesign</h3>
-                <p class="mono" style="color: var(--accent-pink); font-size: 0.8rem; margin-bottom: 10px;">[Figma / UI-UX]</p>
-                <p class="desc">A comprehensive visual interface redesign of a campus academic portal, focused on modernizing information hierarchy.</p>
+                <h3>Automated ERP & Shipping Pipeline</h3>
+                <p class="mono" style="color: var(--accent-pink); font-size: 0.8rem; margin-bottom: 10px;">[Python / Streamlit / Supabase / Flutter ]</p>
+                <p class="desc">An order management system built to streamline quotation, invoice, and delivery order workflows. Order data is converted into QR-based labels and passed to a companion Flutter app for printing.</p>
             </div>
 
            
@@ -551,30 +551,37 @@
             </div>
         </div>
 
-        <!-- Modal 3: SIAKAD -->
+               <!-- Modal: Automated ERP & Shipping Pipeline -->
         <div class="modal-overlay" id="modal-siakad" onclick="closeModal(event, this)">
             <div class="modal-content">
-                <!-- Tombol Close Kotak -->
                 <span class="close-modal" onclick="closeModalBtn('modal-siakad')">&#10005;</span>
-                    <div class="modal-body">
-                    <img src="img/SiakadFigma.webp" alt="SIAKAD Redesign">
+                <div class="modal-body">
                     
-                    <!-- Flexbox untuk Judul & Tombol Figma biar sejajar -->
+                    <!-- Slider 2 Foto -->
+                    <div class="modal-slider">
+                        <div class="slides" id="erp-slides">
+                            <img src="img/streaml.webp" class="slide active" alt="ERP Web Dashboard">
+                            <img src="img/qrther.webp" class="slide" alt="Flutter Companion App">
+                        </div>
+                        <button class="slider-btn prev" onclick="changeSlide(-1, 'erp-slides')">&#10094;</button>
+                        <button class="slider-btn next" onclick="changeSlide(1, 'erp-slides')">&#10095;</button>
+                    </div>
+
                     <div class="modal-header-flex">
-                        <h3>SIAKAD Desktop UI Redesign</h3>
-                        <!-- link figma -->
-                        <a href="https://www.figma.com/proto/zPUus7IXJ73CgPqCFuIL3G/IoT-UI%2FUX-Test?node-id=0-1&t=YE4ywA5TBmt17sK7-1" target="_blank" class="btn-figma">LINK FIGMA</a>
+                        <h3>Automated ERP & Shipping Pipeline</h3>
                     </div>
                     
-                    <span class="mono" style="color: var(--accent-pink); font-size: 0.85rem; margin-bottom: 20px; display: inline-block;">[Figma / UI-UX]</span>
+                    <span class="mono" style="color: var(--accent-pink); font-size: 0.85rem; margin-bottom: 20px; display: inline-block;">[Python / Streamlit / Supabase / Flutter]</span>
                     
-                    <!-- Deskripsi yang sudah ditambahkan konteks KSM IoT -->
-                    <p>A personal initiative to restructure the visual interface and user experience of the university's academic portal. <strong>This project was developed as a prerequisite assignment for joining the KSM Internet of Things in 2024.</strong></p>
+                    <p>A lightweight order management and fulfillment system built to simplify quotation, invoice, and delivery order workflows. The web app syncs product and order data with Supabase and generates QR-based order data for the shipping process. A companion Flutter app reads the QR data and prints shipping labels directly to an 80mm thermal printer over Bluetooth.</p>
                     
                     <p style="color: var(--accent-cyan); margin-bottom: 5px; font-weight: 600;">Technical Highlights:</p>
                     <ul style="margin-left: 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
-                        <li>Modernized information hierarchy for better readability and navigation.</li>
-                        <li>Designed an aesthetically pleasing, student-centric interface workflow using Figma.</li>
+                        <li><strong>ERP & Document Pipeline:</strong> Built a Streamlit and Supabase-based order management system for automating quotations, invoices, and delivery orders.</li>
+                        <li><strong>QR Data Pipeline:</strong> Generated compact JSON QR codes directly from delivery orders for transferring order data to the shipping app.</li>
+                        <li><strong>Flutter Companion App:</strong> Developed an Android app to scan QR data, parse order details, and edit label information before printing.</li>
+                        <li><strong>Thermal Printing:</strong> Integrated Bluetooth ESC/POS printing for QR codes, Code 128 barcodes, and customizable 80mm shipping labels.</li>
+                        <li><strong>Remote Access:</strong> Used Cloudflare Tunnel to access the locally hosted ERP from external devices.</li>
                     </ul>
                 </div>
             </div>
