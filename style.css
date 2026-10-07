@@ -169,20 +169,33 @@
         .card-tech { 
             grid-column: span 1; 
             grid-row: span 2; 
-            justify-content: flex-start; /* Konten mulai dari atas, tidak kepisah ke ujung bawah */
-            gap: 15px; /* Memberi jarak normal yang pas antara judul 'Skills' dan daftar 'tech-list' */
+            justify-content: flex-start;
+            gap: 12px;
+            overflow: visible;
+            padding: 22px 20px;
         }
 
         .card-tech .tech-list {
             display: flex;
             flex-direction: column;
-            gap: 8px; /* Jarak antar sub-kategori/item agar tersebar elegan */
+            gap: 17px;
         }
 
         .card-tech .tech-list p { 
-            font-size: 0.88rem; 
-            margin-bottom: 10px; 
+            font-size: 0.82rem; 
+            margin: 0;
             color: var(--text-muted); 
+            line-height: 1.45;
+        }
+
+        .card-tech .tech-list p.category-title {
+            font-size: 0.72rem;
+            margin-top: 10px;
+            margin-bottom: 2px;
+        }
+
+        .card-tech .tech-list p.category-title:first-child {
+            margin-top: 2px;
         }
 
         /* --- SECTION 2: PROJECTS --- */
