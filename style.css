@@ -166,8 +166,24 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.3; }
         }
-        .card-tech { grid-column: span 1; grid-row: span 1; justify-content: center; }
-        .card-tech .tech-list p { font-size: 0.9rem; margin-bottom: 5px; color: var(--text-muted); }
+        .card-tech { 
+            grid-column: span 1; 
+            grid-row: span 2; 
+            justify-content: flex-start; /* Konten mulai dari atas, tidak kepisah ke ujung bawah */
+            gap: 15px; /* Memberi jarak normal yang pas antara judul 'Skills' dan daftar 'tech-list' */
+        }
+
+        .card-tech .tech-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px; /* Jarak antar sub-kategori/item agar tersebar elegan */
+        }
+
+        .card-tech .tech-list p { 
+            font-size: 0.88rem; 
+            margin-bottom: 10px; 
+            color: var(--text-muted); 
+        }
 
         /* --- SECTION 2: PROJECTS --- */
        .projects-grid {

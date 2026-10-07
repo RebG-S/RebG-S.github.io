@@ -132,22 +132,4 @@ function reveal() {
             targetTab.classList.add('active');
             document.querySelector(`.tab-btn-gallery[data-target="${tabName}"]`).classList.add('active');
         }
-        // Fungsi Switch Tabs Khusus Gallery
-        function openGalleryTab(tabName) {
-            const tabContents = document.querySelectorAll('.tab-content-gallery');
-            const tabBtns = document.querySelectorAll('.tab-btn-gallery');
-
-            // Sembunyikan semua isi tab dan hapus status aktif
-            tabContents.forEach(tab => tab.classList.remove('active'));
-            tabBtns.forEach(btn => btn.classList.remove('active'));
-
-            // Ambil elemen tab tujuan
-            const targetTab = document.getElementById(tabName);
-            
-            // Trik Reflow untuk mencegah lag saat tab dipencet
-            void targetTab.offsetWidth; 
-
-            // Tampilkan konten tab yang diklik dan tombol aktifnya
-            targetTab.classList.add('active');
-            document.querySelector(`.tab-btn-gallery[data-target="${tabName}"]`).classList.add('active');
-        }
+    

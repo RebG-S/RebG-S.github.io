@@ -38,24 +38,19 @@
                 <img src="img/IMG_main.webp" alt="PP">
             </div>
 
-          <div class="bento-card card-clock">
-                <span class="mono" style="color: var(--accent-cyan); font-size: 0.7rem; margin-bottom: 5px;">Local Time</span>
-                <div class="digital-time" id="live-clock">00:00:00</div>
-                <p class="mono" style="font-size: 0.75rem; color: var(--text-muted); margin-top: 5px;">JKT, ID (UTC+7)</p>
-                <!--<div class="status-dot-container">
-                    <div class="status-dot"></div>
-                    <span style="font-size: 0.65rem; color: var(--text-muted); font-family: 'JetBrains Mono', monospace;">SYSTEM ONLINE</span>
-                </div>-->
-            </div>
-
             <div class="bento-card card-tech">
-            <span class="mono" style="color: var(--accent-cyan); margin-bottom: 5px;">Skills</span>
+            <span class="mono" style="color: var(--accent-cyan); margin-bottom: 0px;">Skills</span>
             
             <div class="tech-list">
                 <!-- Kategori Engineering (Cyan) -->
                 <p class="mono" style="color: var(--accent-cyan); font-size: 0.75rem; margin: 10px 0 5px;">> Dev & Eng</p>
                 <p><i class="fas fa-microchip"></i> ESP32 / Arduino / Hardware</p>
-                <p><i class="fab fa-python"></i> Python (Basic) / Cisco</p>
+                <p><i class="fab fa-python"></i> Python / Flask / Streamlit</p>
+                <p><i class="fa-solid fa-server"></i> SQL / Supabase / Git</p>
+
+                <p class="mono" style="color: var(--accent-cyan); font-size: 0.75rem; margin: 10px 0 5px;">> Networking</p>
+                <p><i class="fa-solid fa-network-wired"></i> Cisco / MikroTik</p>
+                <p><i class="fa-solid fa-diagram-project"></i> VLAN / Routing / SNMP</p>
 
                 <!-- Kategori Design (Pink) -->
                 <p class="mono" style="color: var(--accent-pink); font-size: 0.75rem; margin: 15px 0 5px;">> Design</p>
@@ -260,7 +255,31 @@
             </div>
 
         
-        <!-- Kartu 2: Cisco -->
+        <!-- Kartu 2: ORDER -->
+            <div class="bento-card" onclick="openModal('modal-siakad')">
+                <div class="proj-img"><img src="img/streaml.webp" alt="SIAKAD"loading="lazy">
+                    <div class="proj-overlay">
+                        <span class="proj-text"><i class="fas fa-search-plus"></i> Click for Details</span>
+                    </div>
+                </div>
+                <h3>Order Management & Shipping Automation</h3>
+                <p class="mono" style="color: var(--accent-pink); font-size: 0.8rem; margin-bottom: 10px;">[Python / Streamlit / Supabase / Flutter ]</p>
+                <p class="desc">A lightweight order management and shipping system built for a real-world business workflow, automating quotation, invoicing, delivery orders, and QR-based thermal label printing.</p>
+            </div>
+
+        <!-- Kartu 3: IoT -->
+            <div class="bento-card" onclick="openModal('modal-iot')">
+                <div class="proj-img"><img src="img/BoxGasDetector.webp" alt="IoT"loading="lazy">
+                    <div class="proj-overlay">
+                        <span class="proj-text"><i class="fas fa-search-plus"></i> Click for Details</span>
+                    </div>
+                </div>
+                <h3>Smart Gas Leak Detector</h3>
+                <p class="mono" style="color: var(--accent-pink); font-size: 0.8rem; margin-bottom: 10px;">[ESP-NOW / Hardware / Collaborative Project]</p>
+                <p class="desc">An autonomous IoT safety system featuring router-independent M2M communication to automatically trip electrical breakers during emergencies.</p>
+            </div>
+        
+        <!-- Kartu 4: Cisco -->
             <div class="bento-card" onclick="openModal('modal-port-sec')">
                 <div class="proj-img"><img src="img/kotak3.webp" alt="Cisco"loading="lazy">
                     <div class="proj-overlay">
@@ -269,34 +288,10 @@
                 </div>
                 <h3>Port Security Automation</h3>
                 <p class="mono" style="color: var(--accent-pink); font-size: 0.8rem; margin-bottom: 10px;">[Cisco SF-300 / Python]</p>
-                <p class="desc">>A custom web-based dashboard utilizing Python and Netmiko to simplify and automate Layer 2 network security protocols, including manual MAC address whitelisting.</p>
+                <p class="desc">A lightweight local web interface for automating port access control and device whitelisting on a Cisco SF300 switch.</p>
             </div>
 
-            <!-- Kartu 3: Mikrotik -->
-            <div class="bento-card" onclick="openModal('modal-mikrotik')">
-                <div class="proj-img"><img src="img/Group 1195.webp" alt="MikroTik Configurations"loading="lazy">
-                    <div class="proj-overlay">
-                        <span class="proj-text"><i class="fas fa-search-plus"></i> Click for Details</span>
-                       </div> 
-                </div>
-                <h3>MikroTik Network Segmentation & Firewall Lab</h3>
-                <p class="mono" style="color: var(--accent-pink); font-size: 0.8rem; margin-bottom: 10px;">[RouterOS / VLAN / Layer 3 Firewall]</p>
-                <p class="desc">A network segmentation lab implementing dual VLANs, Inter-VLAN routing, DHCP, and firewall filtering to isolate trusted and untrusted segments while maintaining internet access through NAT.
-            </div>
-
-            <!-- Kartu 3: IoT -->
-            <div class="bento-card" onclick="openModal('modal-iot')">
-                <div class="proj-img"><img src="img/BoxGasDetector.webp" alt="IoT"loading="lazy">
-                    <div class="proj-overlay">
-                        <span class="proj-text"><i class="fas fa-search-plus"></i> Click for Details</span>
-                    </div>
-                </div>
-                <h3>IoT Gas Leak Detector</h3>
-                <p class="mono" style="color: var(--accent-pink); font-size: 0.8rem; margin-bottom: 10px;">[ESP-NOW / Hardware]</p>
-                <p class="desc">An autonomous IoT safety system featuring router-independent M2M communication to automatically trip electrical breakers during emergencies.</p>
-            </div>
-
-             <!-- Kartu 4: Legacy Router Security Bot -->
+        <!-- Kartu 4: Legacy Router Security Bot -->
             <div class="bento-card" onclick="openModal('modal-router-bot')">
                 <div class="proj-img">
                     <!-- Ganti src dengan screenshot bot / topologi router kamu -->
@@ -307,25 +302,20 @@
                 </div>
                 <h3>Legacy Router Security Bot</h3>
                 <p class="mono" style="color: var(--accent-pink); font-size: 0.8rem; margin-bottom: 10px;">[Linksys E900 / Python / Telegram API]</p>
-                <p class="desc">A Telegram bot utilizing HTTP reverse-engineering to bypass legacy hardware limits, enabling live network monitoring and 1-click MAC filtering.</p>           
+                <p class="desc">A Telegram-based network management bot that automates device monitoring and MAC filtering on a legacy Linksys E900 router through HTTP requests.</p>           
                 </div>
 
-            <!-- Kartu 5: SIAKAD -->
-            <div class="bento-card" onclick="openModal('modal-siakad')">
-                <div class="proj-img"><img src="img/streaml.webp" alt="SIAKAD"loading="lazy">
+        <!-- Kartu 5: Mikrotik -->
+            <div class="bento-card" onclick="openModal('modal-mikrotik')">
+                <div class="proj-img"><img src="img/Group 1195.webp" alt="MikroTik Configurations"loading="lazy">
                     <div class="proj-overlay">
                         <span class="proj-text"><i class="fas fa-search-plus"></i> Click for Details</span>
-                    </div>
+                       </div> 
                 </div>
-                <h3>Automated ERP & Shipping Pipeline</h3>
-                <p class="mono" style="color: var(--accent-pink); font-size: 0.8rem; margin-bottom: 10px;">[Python / Streamlit / Supabase / Flutter ]</p>
-                <p class="desc">An order management system built to streamline quotation, invoice, and delivery order workflows. Order data is converted into QR-based labels and passed to a companion Flutter app for printing.</p>
+                <h3>MikroTik Network Segmentation & Firewall Lab</h3>
+                <p class="mono" style="color: var(--accent-pink); font-size: 0.8rem; margin-bottom: 10px;">[RouterOS / VLAN / Layer 3 Firewall]</p>
+                <p class="desc">A hands-on network segmentation lab using MikroTik RouterOS and a Cisco SF300, featuring dual VLANs, inter-VLAN routing, firewall isolation, DHCP, and NAT.</p>
             </div>
-
-           
-
-            
-
         </div>
     </section>
 
@@ -459,15 +449,27 @@
             <div class="modal-content">
                 <span class="close-modal" onclick="closeModalBtn('modal-port-sec')">&#10005;</span>
                 <div class="modal-body">
-                    <img src="img/kotak3.webp" alt="Cisco Port Security">
+                    <div class="modal-slider">
+                        <div class="slides" id="port-sec-slides">
+                            <!-- Foto 1 (Utama) -->
+                            <img src="img/kotak3.webp" class="slide active" alt="Cisco Port Security Dashboard">
+                            <!-- Foto 2 (Tambahan Baru) -->
+                            <img src="img/ciscosf300.webp" class="slide" alt="Architecture">
+                        </div>
+                        <!-- Tombol Navigasi Slider -->
+                        <button class="slider-btn prev" onclick="changeSlide(-1, 'port-sec-slides')">&#10094;</button>
+                        <button class="slider-btn next" onclick="changeSlide(1, 'port-sec-slides')">&#10095;</button>
+                    </div>
                     <h3>Port Security Automation</h3>
                     <span class="mono" style="color: var(--accent-pink); font-size: 0.85rem; margin-bottom: 20px; display: inline-block;">[Cisco SF-300 / Python]</span>
-                    <p>Developed a custom web-based dashboard designed to simplify and automate Layer 2 network security protocols on Cisco SF-300 switches.</p>
+                    <p>Developed a lightweight Flask-based web interface for remotely managing port access and device whitelisting on a Cisco SF300 switch over SSH.</p>
                     <p style="color: var(--accent-cyan); margin-bottom: 5px; font-weight: 600;">Technical Highlights:</p>
                     <ul style="margin-left: 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
-                        <li>Implemented Python and Netmiko to push automated CLI configurations.</li>
-                        <li>Created an intuitive GUI for 1-click access control.</li>
-                        <li>Integrated manual MAC address input functionality to dynamically update the network whitelist.</li>
+                        <li><strong>SSH Automation:</strong> Used Python and Netmiko to remotely execute CLI commands and manage the switch.</li>
+                        <li><strong>Port Access Control:</strong> Implemented 1-click port blocking and unblocking through the web interface.</li>
+                        <li><strong>Whitelist Management:</strong> Added JSON-based device/port whitelisting with manual add, update, and delete functionality.</li>
+                        <li><strong>Automatic Blocking:</strong> Automatically blocks active ports associated with devices not present in the whitelist.</li>
+                        <li><strong>Port Monitoring:</strong> Retrieved and parsed switch interface status to display port type, speed, link state, and assigned device information.</li>
                     </ul>
                 </div>
             </div>
@@ -509,9 +511,13 @@
                     
                     <p style="color: var(--accent-cyan); margin-bottom: 5px; font-weight: 600;">Technical Highlights:</p>
                     <ul style="margin-left: 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
-                        <li>Integrated an MQ6 sensor for LPG detection and a speaker for local voice alerts.</li>
-                        <li>Engineered a motorized servo mechanism to physically trip the MCB switch, cutting house electricity during emergencies.</li>
-                        <li>Implemented the CallMeBot API to send real-time emergency notifications via WhatsApp.</li>
+                        <li><strong>Gas Detection:</strong> Integrated an MQ-6 sensor for LPG detection and a speaker for local voice alerts.</li>
+                        <li><strong>Emergency Shutdown:</strong> Engineered a motorized servo mechanism to physically trip the MCB switch, cutting house electricity during emergencies.</li>
+                        <li><strong>Remote Notification:</strong> Integrated the CallMeBot API to send gas-leak alerts via WhatsApp.</li>
+                    </ul>
+                        <p style="color: var(--accent-cyan); margin-bottom: 5px; font-weight: 600;">My Contribution:</p>
+                    <ul>
+                        <li><strong>Hardware &amp; Integration:</strong> Primarily handled hardware assembly, soldering, and enclosure fabrication, with additional contributions to firmware development and overall system integration.</li>
                     </ul>
                 </div>
             </div>
@@ -527,7 +533,7 @@
                 <div class="modal-slider">
                     <div class="slides" id="mikrotik-slides">
                         <img src="img/Group 1195.webp" class="slide active" alt="MikroTik Topologi">
-                        <img src="img/Group 119ccc6.webp" class="slide" alt="MikroTik Graphing">
+                        <img src="img/mikrotikvlan.webp" class="slide" alt="MikroTik Graphing">
                     </div>
                     <button class="slider-btn prev" onclick="changeSlide(-1, 'mikrotik-slides')">&#10094;</button>
                     <button class="slider-btn next" onclick="changeSlide(1, 'mikrotik-slides')">&#10095;</button>
@@ -539,19 +545,23 @@
                 
                 <span class="mono" style="color: var(--accent-pink); font-size: 0.85rem; margin-bottom: 20px; display: inline-block;">[RouterOS / VLAN / Layer 3 Firewall]</span>
                     
-                <p>A network lab focused on segmenting traffic using dual VLANs, establishing secure Inter-VLAN routing, and configuring NAT for internet access while isolating trusted and untrusted environments.</p>
+                <p>A hands-on network segmentation lab built with MikroTik RouterOS and a Cisco SF300 managed switch. The setup uses separate VLANs for main and lab environments, with dedicated DHCP services, Inter-VLAN routing, firewall isolation, and NAT for internet connectivity.</p>
                 
                 <p style="color: var(--accent-cyan); margin-bottom: 5px; font-weight: 600;">Technical Highlights:</p>
                 <ul style="margin-left: 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
-                    <li><strong>VLAN & Routing:</strong> Configured dual VLANs with Inter-VLAN routing and automated DHCP provisioning.</li>
-                    <li><strong>Firewall & Security:</strong> Implemented Layer 3 firewall filtering to restrict traffic between segments and configured Source NAT (src-nat) for secure internet connectivity.</li>
-                    <li><strong>Traffic Monitoring:</strong> Tracked interface bandwidth utilization using MikroTik's native graphing tools.</li>
+                    <li><strong>VLAN Segmentation:</strong> Configured VLAN 10 (192.168.10.0/24) and VLAN 20 (192.168.20.0/24) on MikroTik RouterOS to separate network environments.</li>
+                    <li><strong>VLAN Trunking:</strong> Configured the Cisco SF300 uplink as a trunk carrying tagged VLAN 10 and VLAN 20 traffic from the MikroTik.</li>
+                    <li><strong>Inter-VLAN Routing:</strong> Configured dedicated VLAN interfaces and gateways on MikroTik to enable Layer 3 communication between the segmented networks.</li>
+                    <li><strong>DHCP:</strong> Configured separate DHCP services for each VLAN to automatically assign addresses to connected devices.</li>
+                    <li><strong>Firewall Isolation:</strong> Implemented Layer 3 firewall filtering to prevent traffic from the lab VLAN from reaching the main network.</li>
+                    <li><strong>NAT:</strong> Configured source NAT (masquerade) to provide internet access to the segmented VLANs.</li>
+                    <li><strong>Traffic Monitoring:</strong> Used MikroTik's built-in graphing tools to monitor traffic across the VLAN interfaces.</li>
                 </ul>
                 </div>
             </div>
         </div>
 
-               <!-- Modal: Automated ERP & Shipping Pipeline -->
+               <!-- Modal: Order & Shipping Pipeline -->
         <div class="modal-overlay" id="modal-siakad" onclick="closeModal(event, this)">
             <div class="modal-content">
                 <span class="close-modal" onclick="closeModalBtn('modal-siakad')">&#10005;</span>
@@ -568,20 +578,23 @@
                     </div>
 
                     <div class="modal-header-flex">
-                        <h3>Automated ERP & Shipping Pipeline</h3>
+                        <h3>Order Management & Shipping Automation</h3>
                     </div>
                     
                     <span class="mono" style="color: var(--accent-pink); font-size: 0.85rem; margin-bottom: 20px; display: inline-block;">[Python / Streamlit / Supabase / Flutter]</span>
                     
-                    <p>A lightweight order management and fulfillment system built to simplify quotation, invoice, and delivery order workflows. The web app syncs product and order data with Supabase and generates QR-based order data for the shipping process. A companion Flutter app reads the QR data and prints shipping labels directly to an 80mm thermal printer over Bluetooth.</p>
+                    <p>Developed a lightweight order management and shipping pipeline to streamline a real-world business workflow from quotation to delivery. The Streamlit web application manages product pricing and order data through Supabase, generates quotation, invoice, and delivery order documents, and creates QR-based shipping data for a companion Android label-printing application.</p>
+
+                    <p>The Flutter companion app scans the generated QR code, automatically populates shipping and item details, and prints 80mm thermal labels with QR codes and Code 128 barcodes over Bluetooth.</p>
                     
                     <p style="color: var(--accent-cyan); margin-bottom: 5px; font-weight: 600;">Technical Highlights:</p>
                     <ul style="margin-left: 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
-                        <li><strong>ERP & Document Pipeline:</strong> Built a Streamlit and Supabase-based order management system for automating quotations, invoices, and delivery orders.</li>
+                        <li><strong>Order & Document Management:</strong> Built a Streamlit-based workflow for creating quotations and generating invoices and delivery orders from stored order data.</li>
+                        <li><strong>Cloud Database:</strong> Integrated Supabase to maintain the product catalog, pricing, order records, and document status.</li>
                         <li><strong>QR Data Pipeline:</strong> Generated compact JSON QR codes directly from delivery orders for transferring order data to the shipping app.</li>
                         <li><strong>Flutter Companion App:</strong> Developed an Android app to scan QR data, parse order details, and edit label information before printing.</li>
                         <li><strong>Thermal Printing:</strong> Integrated Bluetooth ESC/POS printing for QR codes, Code 128 barcodes, and customizable 80mm shipping labels.</li>
-                        <li><strong>Remote Access:</strong> Used Cloudflare Tunnel to access the locally hosted ERP from external devices.</li>
+                   <!-- <li><strong>Remote Access:</strong> Used Cloudflare Tunnel to access the locally hosted server from external devices.</li>-->
                     </ul>
                 </div>
             </div>
@@ -603,13 +616,14 @@
                     <h3>Legacy Router Security Bot</h3>
                     <span class="mono" style="color: var(--accent-pink); font-size: 0.85rem; margin-bottom: 20px; display: inline-block;">[Linksys E900 / Python / Telegram API]</span>
                     
-                    <p>Designed and deployed a lightweight automation bot to modernize network management on legacy Linksys E900 hardware, overcoming stock firmware constraints without flashing custom ROMs.</p>
+                    <p>Designed and deployed a lightweight Telegram-based network management bot for a legacy Linksys E900 router, providing remote device monitoring and MAC filtering despite the router's lack of SSH-based management, overcoming stock firmware constraints without flashing custom ROMs.</p>
                     
                     <p style="color: var(--accent-cyan); margin-bottom: 5px; font-weight: 600;">Technical Highlights:</p>
                     <ul style="margin-left: 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
-                         <li><strong>HTTP Reverse-Engineering:</strong> Replicated session tokens and POST requests for programmatic router authentication and control.</li>
-                        <li><strong>Telegram Automation:</strong> Enabled 1-click Wireless MAC Filtering (allow/block) via interactive chat keyboards.</li>
-                        <li><strong>Live Intrusion Alerts:</strong> Parsed raw router client tables into formatted, periodic Telegram notifications.</li>
+                        <li><strong>HTTP Automation:</strong> Automated authenticated HTTP GET/POST requests to interact with the router's web management interface.</li>
+                        <li><strong>DHCP Monitoring:</strong> Parsed the router's DHCP client table to retrieve connected device names, IP addresses, MAC addresses, and connection types.</li>
+                        <li><strong>MAC Filtering:</strong> Implemented remote device blocking and bulk unblocking by programmatically updating the router's wireless MAC filter configuration.</li>
+                        <li><strong>Telegram Interface:</strong> Built an interactive Telegram bot with inline controls for monitoring connected devices and blocking selected wireless clients.</li>
                     </ul>
                 </div>
             </div>
@@ -620,22 +634,32 @@
             <div class="modal-content">
                 <span class="close-modal" onclick="closeModalBtn('modal-telemetry')">&#10005;</span>
                 <div class="modal-body">
-                    <img src="img/Group 1196ss.webp" alt="Cisco Telemetry Architecture">
+                   <div class="modal-slider">
+                        <div class="slides" id="telemetry-slides">
+                            <!-- Foto 1 (Utama) -->
+                            <img src="img/Group 1196ss.webp" class="slide active" alt="Dashboard">
+                            <!-- Foto 2 (Tambahan Baru) -->
+                            <img src="img/telemetry.webp" class="slide" alt="Cisco Telemetry Architecture">
+                        </div>
+                        <!-- Tombol Navigasi Slider -->
+                        <button class="slider-btn prev" onclick="changeSlide(-1, 'telemetry-slides')">&#10094;</button>
+                        <button class="slider-btn next" onclick="changeSlide(1, 'telemetry-slides')">&#10095;</button>
+                    </div>
                     
-                    <h3>Real-Time Network Telemetry</h3>
-                    <span class="mono" style="color: var(--accent-pink); font-size: 0.85rem; margin-bottom: 20px; display: inline-block;">[Cisco / Python / InfluxDB / Grafana]</span>
+                    <h3>Network Telemetry & Dashboard</h3>
+                    <span class="mono" style="color: var(--accent-pink); font-size: 0.85rem; margin-bottom: 20px; display: inline-block;">[Cisco SF-300 / Python / InfluxDB / Grafana]</span>
                     
-                    <p>Developed an end-to-end network telemetry monitoring system to track live bandwidth utilization (RX/TX) on specific switch ports, bridging legacy hardware with modern time-series visualization.</p>
+                    <p>A personal networking project exploring SNMP-based telemetry by monitoring TX/RX traffic from a home Wi-Fi router connected to a Cisco SF300 switch.</p>
                     
                     <p style="color: var(--accent-cyan); margin-bottom: 5px; font-weight: 600;">Technical Highlights:</p>
                     <ul style="margin-left: 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
-                        <li><strong>Data Collection:</strong> Built an async Python worker using SNMP v2c to efficiently poll switch interface metrics.</li>
-                        <li><strong>Data Storage:</strong> Configured InfluxDB to securely ingest, structure, and store high-frequency network metrics.</li>
-                        <li><strong>Visualization:</strong> Designed an enterprise-ready Grafana dashboard with real-time gauges, historical trends, and automatic unit conversions.</li>
+                        <li><strong>SNMP Collection:</strong> Developed an asynchronous Python worker to periodically poll interface statistics from the Cisco SF300 via SNMP v2c.</li>
+                        <li><strong>Data Processing:</strong> Calculated TX/RX bandwidth from interface counter changes between polling intervals.</li>
+                        <li><strong>Time-Series Storage:</strong> Stored collected metrics in InfluxDB for historical analysis.</li>
+                        <li><strong>Visualization:</strong> Built a Grafana dashboard with real-time gauges and historical traffic graphs.</li>
                     </ul>
                 </div>
             </div>
         </div>
-
 </body>
 </html>
