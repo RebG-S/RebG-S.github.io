@@ -1,135 +1,114 @@
+// --- SCROLL REVEAL ---
 function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 50) { reveals[i].classList.add("active"); }
-            }
+    var reveals = document.querySelectorAll(".reveal");
+    for (var i = 0; i < reveals.length; i++) {
+        var windowHeight = window.innerHeight;
+        var elementTop = reveals[i].getBoundingClientRect().top;
+        if (elementTop < windowHeight - 50) { 
+            reveals[i].classList.add("active"); 
         }
-        let isScrolling = false;
-        window.addEventListener("scroll", function() {
-        if (!isScrolling) {
-            window.requestAnimationFrame(function() {
-                reveal();
-                isScrolling = false;
-            });
-            isScrolling = true;
-            }
+    }
+}
+
+let isScrolling = false;
+window.addEventListener("scroll", function() {
+    if (!isScrolling) {
+        window.requestAnimationFrame(function() {
+            reveal();
+            isScrolling = false;
         });
-        reveal();
+        isScrolling = true;
+    }
+});
 
-        // Script buat Live Clock
-        function updateClock() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            
-            document.getElementById('live-clock').textContent = `${hours}:${minutes}:${seconds}`;
-        }
-        
-        // Update jam setiap 1 detik
-        setInterval(updateClock, 1000);
-        updateClock(); // Panggil sekali di awal biar gak nunggu 1 detik dulu
+// Trigger awal saat halaman selesai dimuat
+document.addEventListener("DOMContentLoaded", function() {
+    reveal();
+});
 
-        //Fungsi Untuk Switch Tabs Experience
-        function openTab(tabName) {
-            // Sembunyikan semua isi tab
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabContents.forEach(tab => {
-                tab.classList.remove('active');
-            });
+// --- SWITCH TABS EXPERIENCE ---
+function openTab(tabName) {
+    const tabContents = document.querySelectorAll('#experience .tab-content');
+    tabContents.forEach(tab => tab.classList.remove('active'));
 
-            // Hapus status 'active' dari semua tombol
-            const tabBtns = document.querySelectorAll('.tab-btn');
-            tabBtns.forEach(btn => {
-                btn.classList.remove('active');
-            });
+    const tabBtns = document.querySelectorAll('#experience .tab-btn');
+    tabBtns.forEach(btn => btn.classList.remove('active'));
 
-            // Tampilkan konten tab yang diklik dan kasih efek aktif di tombolnya
-            document.getElementById(tabName).classList.add('active');
-            document.querySelector(`.tab-btn[data-target="${tabName}"]`).classList.add('active');
-            
-            // Ubah warna scrollbar tergantung tab yang aktif (Cyan buat Work, Pink buat Org)
-            const scrollArea = document.querySelector(`#${tabName} .exp-scroll-area`);
-            if(scrollArea) {
-                if(tabName === 'work') {
-                    scrollArea.style.setProperty('scrollbar-color', 'var(--accent-cyan) rgba(255, 255, 255, 0.05)');
-                } else {
-                    scrollArea.style.setProperty('scrollbar-color', 'var(--accent-pink) rgba(255, 255, 255, 0.05)');
-                }
-            }
-        }
-        // --- SCRIPT UNTUK MODAL PROJECTS ---
-            function openModal(modalId) {
-                document.getElementById(modalId).classList.add('active');
-                document.body.style.overflow = 'hidden'; // Mengunci background agar tidak bisa di-scroll
-            }
-
-            function closeModalBtn(modalId) {
-                document.getElementById(modalId).classList.remove('active');
-                document.body.style.overflow = 'auto'; // Membuka kunci scroll background
-            }
-
-            function closeModal(event, element) {
-                // Menutup pop-up secara otomatis jika user mengklik area gelap di luar kotak modal
-                if (event.target === element) {
-                    element.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                }
-            }
-
-            // --- SCRIPT UNTUK SLIDER FOTO IoT ---
-            function changeSlide(direction, sliderId) {
-            const slides = document.querySelectorAll(`#${sliderId} .slide`);
-            
-            // Cari index foto mana yang sedang aktif saat ini
-            let currentIndex = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
-            
-            // Matikan foto yang sedang aktif
-            slides[currentIndex].classList.remove('active');
-            
-            // Hitung index foto selanjutnya
-            let nextIndex = (currentIndex + direction + slides.length) % slides.length;
-            
-            // Nyalakan foto selanjutnya
-            slides[nextIndex].classList.add('active');
-        }
-
-
-            // --- SCRIPT UNTUK FULLSCREEN POSTER ---
-            function openPoster() {
-                document.getElementById('poster-fullscreen').classList.add('active');
-            }
-
-            function closePosterBtn() {
-                document.getElementById('poster-fullscreen').classList.remove('active');
-            }
-
-            function closePoster(event, element) {
-                // Kalau user klik di luar gambar (area hitam), poster otomatis ketutup
-                if (event.target === element) {
-                    element.classList.remove('active');
-                }
-            }
-            //Fungsi Untuk Switch Tabs Khusus di Gallery
-            function openGalleryTab(tabName) {
-            const tabContents = document.querySelectorAll('.tab-content-gallery');
-            const tabBtns = document.querySelectorAll('.tab-btn-gallery');
-
-            // Sembunyikan semua isi tab dan hapus status aktif
-            tabContents.forEach(tab => tab.classList.remove('active'));
-            tabBtns.forEach(btn => btn.classList.remove('active'));
-
-            // Ambil elemen tab yang dituju
-            const targetTab = document.getElementById(tabName);
-            
-            // Trik "Reflow": Memaksa browser menghitung layout ulang sebelum animasi jalan
-            // Ini adalah kunci agar transisi dari display: none ke block menjadi smooth
-            void targetTab.offsetWidth; 
-
-            // Tampilkan konten tab yang diklik dan kasih efek aktif di tombolnya
-            targetTab.classList.add('active');
-            document.querySelector(`.tab-btn-gallery[data-target="${tabName}"]`).classList.add('active');
-        }
+    const targetContent = document.getElementById(tabName);
+    const targetBtn = document.querySelector(`#experience .tab-btn[data-target="${tabName}"]`);
     
+    if (targetContent) targetContent.classList.add('active');
+    if (targetBtn) targetBtn.classList.add('active');
+}
+
+// --- SWITCH TABS GALLERY ---
+function openGalleryTab(tabName) {
+    const tabContents = document.querySelectorAll('.tab-content-gallery');
+    const tabBtns = document.querySelectorAll('.tab-btn-gallery');
+
+    tabContents.forEach(tab => tab.classList.remove('active'));
+    tabBtns.forEach(btn => btn.classList.remove('active'));
+
+    const targetTab = document.getElementById(tabName);
+    const targetBtn = document.querySelector(`.tab-btn-gallery[data-target="${tabName}"]`);
+
+    if (targetTab) {
+        void targetTab.offsetWidth; // Reflow trigger untuk transisi smooth
+        targetTab.classList.add('active');
+    }
+    if (targetBtn) targetBtn.classList.add('active');
+}
+
+// --- MODAL POPUP PROJECTS ---
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeModalBtn(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+function closeModal(event, element) {
+    if (event.target === element) {
+        element.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// --- SLIDER FOTO DALAM MODAL ---
+function changeSlide(direction, sliderId) {
+    const slides = document.querySelectorAll(`#${sliderId} .slide`);
+    if (!slides.length) return;
+    
+    let currentIndex = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+    if (currentIndex === -1) currentIndex = 0;
+    
+    slides[currentIndex].classList.remove('active');
+    let nextIndex = (currentIndex + direction + slides.length) % slides.length;
+    slides[nextIndex].classList.add('active');
+}
+
+// --- LIGHTBOX POSTER FULLSCREEN ---
+function openPoster() {
+    const poster = document.getElementById('poster-fullscreen');
+    if (poster) poster.classList.add('active');
+}
+
+function closePosterBtn() {
+    const poster = document.getElementById('poster-fullscreen');
+    if (poster) poster.classList.remove('active');
+}
+
+function closePoster(event, element) {
+    if (event.target === element) {
+        element.classList.remove('active');
+    }
+}
